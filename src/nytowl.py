@@ -1,4 +1,5 @@
 from cursor import Cursor
+from screen import Screen
 
 from console_helper import *
 
@@ -21,6 +22,8 @@ class NytOwlTextEditor:
                 
         self.cursor = Cursor()
         self.running = True
+        
+        self.screen = Screen(self)
         self.cmds = {UP_ARROW:self.cursorUp,
                            DOWN_ARROW:self.cursorDown,
                            LEFT_ARROW:self.cursorLeft,
@@ -39,8 +42,9 @@ class NytOwlTextEditor:
             
     def loop(self):
         """ Main loop for the Text Editor """
-        print "\r"
-        print "Current file: %s | Line: %d | Col: %d\r" % (self.filename, self.cursor.line, self.cursor.col)
+        #print "\r"
+        #print "Current file: %s | Line: %d | Col: %d\r" % (self.filename, self.cursor.line, self.cursor.col)
+        self.screen.printScreen()
         c, val = self.getInput()
         
         if val == ESCAPE:
@@ -55,7 +59,7 @@ class NytOwlTextEditor:
         else:
             self.addString(c)
             
-        print self.currentLine(), "\r"
+        #print self.currentLine(), "\r"
         
     def getInput(self):
         """ Gets a char and its ord """
@@ -161,7 +165,7 @@ class NytOwlTextEditor:
         
         self.text[self.cursor.line-1] += line
         
-        self.text = self.concatenate(self.text, self.cursor.line, self.cursor.line+1)
+        self.text = self.concatenate(self.text, self.cursor.line, self.cursor.line+1, filler = [])
         self.cursorUp()
         
     def concatenate(self, toCut, firstCut, lastCut, filler = ""):
