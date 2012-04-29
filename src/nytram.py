@@ -9,16 +9,14 @@ TAB = 9
 BACKSPACE = 127
 DELETE = 51
 
+HOME = 72
+END = 70
+
 CTRL_S = 19
 UP_ARROW = 65
 DOWN_ARROW = 66
 RIGHT_ARROW = 67
 LEFT_ARROW = 68
-
-NUM_1 = ord('1')
-NUM_2 = ord('2')
-NUM_3 = ord('3')
-NUM_4 = ord('4')
 
 def getch():
     fd = sys.stdin.fileno()
@@ -29,15 +27,9 @@ def getch():
     finally:
         termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old_settings)
     return ch
-    
-def getInput():
-    print "Enter a char:",
-    c = getch()
-    print
-    return c
 
 class NytRamTextEditor:
-    """ The NytRam Test Editor """
+    """ The NytRam Text Editor """
     
     def __init__(self, filename = None):
         """  """
@@ -237,16 +229,3 @@ class NytRamTextEditor:
             
     def noFile(self):
         return self.filename is None
-    
-def main(args):
-    """   """
-    if len(args) > 0:
-        n = NytRamTextEditor(filename = args[0])
-    else:
-        n = NytRamTextEditor()
-        
-    n.run()
-    
-    
-if __name__ == "__main__":
-    main(sys.argv[1:])
