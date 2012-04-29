@@ -11,7 +11,7 @@ class Screen:
     
     def printScreen(self):
         """ Main loop for the Text Editor """
-        cls()
+        #cls()
         print "Current file: %s | Line: %d | Col: %d\r" % (self.parent.filename, self.parent.cursor.line, self.parent.cursor.col)
             
         self.printText()

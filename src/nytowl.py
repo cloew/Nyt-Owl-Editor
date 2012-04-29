@@ -1,4 +1,5 @@
 from cursor import Cursor
+from input_processor import InputProcessor
 from screen import Screen
 
 from console_helper import *
@@ -21,9 +22,12 @@ class NytOwlTextEditor:
                 print "Unable to open file"
                 
         self.cursor = Cursor()
+        self.inputProcessor = InputProcessor(self)
+        self.screen = Screen(self)
+        
         self.running = True
         
-        self.screen = Screen(self)
+        
         self.cmds = {UP_ARROW:self.cursorUp,
                            DOWN_ARROW:self.cursorDown,
                            LEFT_ARROW:self.cursorLeft,
@@ -42,9 +46,11 @@ class NytOwlTextEditor:
             
     def loop(self):
         """ Main loop for the Text Editor """
-        #print "\r"
-        #print "Current file: %s | Line: %d | Col: %d\r" % (self.filename, self.cursor.line, self.cursor.col)
         self.screen.printScreen()
+        self.inputProcessor.processInput()
+            
+    def processInput(self):
+        """ Processes inpout from the commadn line """
         c, val = self.getInput()
         
         if val == ESCAPE:
@@ -58,8 +64,6 @@ class NytOwlTextEditor:
             self.cmds[val]()
         else:
             self.addString(c)
-            
-        #print self.currentLine(), "\r"
         
     def getInput(self):
         """ Gets a char and its ord """
