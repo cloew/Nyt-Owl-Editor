@@ -4,7 +4,8 @@ from cursor import Cursor
 ESCAPE = 27
 ARROW_ESCAPE = 91
 ENDL = 13
-TILDA = 126
+TAB = 9
+
 BACKSPACE = 127
 DELETE = 51
 
@@ -61,6 +62,7 @@ class NytRamTextEditor:
                            CTRL_S:self.save, 
                            ESCAPE:self.exit,
                            ENDL:self.addLine,
+                           TAB:self.addTab,
                            BACKSPACE:self.remove,
                            DELETE:self.delete}
         
@@ -75,7 +77,7 @@ class NytRamTextEditor:
         print "Current file: %s | Line: %d | Col: %d\r" % (self.filename, self.cursor.line, self.cursor.col)
         c, val = self.getInput()
         
-        if val == ESCAPE or val == TILDA:
+        if val == ESCAPE:
             c, val = self.getInput()
             if val == ARROW_ESCAPE:
                 c, val = self.getInput()
@@ -125,15 +127,18 @@ class NytRamTextEditor:
         if self.cursor.col > len(line):
             self.cursor.col = len(line)
                 
-    def addString(self):
-        """  """
-        toAdd = str(raw_input("Add text: "))
-        where = int(raw_input("At where: "))
+    def addString(self, toAdd):
+        """ Adds a string at the current cursor """
+        line = self.currentLine()
+        col = self.cursor.col
         
-        first = self.text[:where]
-        last = self.text[where:]
+        first = line[:col]
+        last = line[col:]
         
-        self.text = first + toAdd + last
+        self.text[self.cursor.line] = first + toAdd + last
+        
+        for i in toAdd:
+            self.cursorRight()
         
     def addChar(self, c):
         """ Adds a char at the current cursor position """
@@ -160,6 +165,10 @@ class NytRamTextEditor:
         self.text = first + [newlineText] + last
         self.cursorDown()
         self.cursor.col = 0
+        
+    def addTab(self):
+        """ Adds a Tab at the current cursor location """
+        self.addString(" "*4)
         
     def remove(self):
         """ Removes a character from the line """
