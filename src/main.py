@@ -1,13 +1,13 @@
-from nytram import NytRamTextEditor
+from nytowl import NytOwlTextEditor
 
 import sys
 
 def main(args):
     """   """
     if len(args) > 0:
-        n = NytRamTextEditor(filename = args[0])
+        n = NytOwlTextEditor(filename = args[0])
     else:
-        n = NytRamTextEditor()
+        n = NytOwlTextEditor()
         
     n.run()
     

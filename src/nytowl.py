@@ -2,8 +2,8 @@ from cursor import Cursor
 
 from console_helper import *
 
-class NytRamTextEditor:
-    """ The NytRam Text Editor """
+class NytOwlTextEditor:
+    """ The NytOwl Text Editor """
     
     def __init__(self, filename = None):
         """  """
