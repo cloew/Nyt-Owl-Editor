@@ -49,29 +49,6 @@ class NytOwlTextEditor:
         self.screen.printScreen()
         self.inputProcessor.processInput()
             
-    def processInput(self):
-        """ Processes inpout from the commadn line """
-        c, val = self.getInput()
-        
-        if val == ESCAPE:
-            c, val = self.getInput()
-            if val == ARROW_ESCAPE:
-                c, val = self.getInput()
-                if val == DELETE:
-                    self.getInput()
-        
-        if val in self.cmds.keys():
-            self.cmds[val]()
-        else:
-            self.addString(c)
-        
-    def getInput(self):
-        """ Gets a char and its ord """
-        c = getch()
-        print ord(c), "\r"
-        val = ord(c)
-        return c, val
-            
     def cursorUp(self):
         """ Moves cursor up one line """
         self.cursor.up()
