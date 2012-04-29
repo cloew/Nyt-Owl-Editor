@@ -53,7 +53,7 @@ class NytOwlTextEditor:
         if val in self.cmds.keys():
             self.cmds[val]()
         else:
-            self.addChar(c)
+            self.addString(c)
             
         print self.currentLine(), "\r"
         
@@ -101,20 +101,10 @@ class NytOwlTextEditor:
         first = line[:col]
         last = line[col:]
         
-        self.text[self.cursor.line] = first + toAdd + last
+        self.text[self.cursor.line] = self.concatenate(first, last, filler = toAdd)
         
         for i in toAdd:
             self.cursorRight()
-        
-    def addChar(self, c):
-        """ Adds a char at the current cursor position """
-        line = self.text[self.cursor.line]
-        col = self.cursor.col
-        
-        first = line[:col]
-        last = line[col:]
-        self.text[self.cursor.line] = first + c + last
-        self.cursorRight()
         
     def addLine(self):
         """ Adds a new line to the file """
@@ -128,7 +118,7 @@ class NytOwlTextEditor:
         first = self.text[:self.cursor.line+1]
         last = self.text[self.cursor.line+1:]
         
-        self.text = first + [newlineText] + last
+        self.text = self.concatenate(first, last, filler = [newlineText])
         self.cursorDown()
         self.cursor.col = 0
         
@@ -164,7 +154,7 @@ class NytOwlTextEditor:
         
         first = line[:col-1]
         last = line[col:]
-        self.text[self.cursor.line] = first + last
+        self.text[self.cursor.line] = self.concatenate(first, last)
         self.cursorLeft()
         
     def removeLine(self):
@@ -183,6 +173,9 @@ class NytOwlTextEditor:
         
         self.text = first + last
         self.cursorUp()
+        
+    def concatenate(self, first, last, filler = ""):
+        return first + filler + last
         
     def save(self):
         """  """
