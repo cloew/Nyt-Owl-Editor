@@ -98,10 +98,7 @@ class NytOwlTextEditor:
         line = self.currentLine()
         col = self.cursor.col
         
-        first = line[:col]
-        last = line[col:]
-        
-        self.text[self.cursor.line] = self.concatenate(first, last, filler = toAdd)
+        self.text[self.cursor.line] = self.concatenate(line, col, col, filler = toAdd)
         
         for i in toAdd:
             self.cursorRight()
@@ -115,10 +112,8 @@ class NytOwlTextEditor:
         newlineText = line[col:]
         self.text[self.cursor.line] = lineText
         
-        first = self.text[:self.cursor.line+1]
-        last = self.text[self.cursor.line+1:]
-        
-        self.text = self.concatenate(first, last, filler = [newlineText])
+        cut = self.cursor.line+1
+        self.text = self.concatenate(self.text, cut, cut, filler = [newlineText])
         self.cursorDown()
         self.cursor.col = 0
         
@@ -152,9 +147,7 @@ class NytOwlTextEditor:
         line = self.text[self.cursor.line]
         col = self.cursor.col
         
-        first = line[:col-1]
-        last = line[col:]
-        self.text[self.cursor.line] = self.concatenate(first, last)
+        self.text[self.cursor.line] = self.concatenate(line, col-1, col)
         self.cursorLeft()
         
     def removeLine(self):
@@ -168,14 +161,11 @@ class NytOwlTextEditor:
         
         self.text[self.cursor.line-1] += line
         
-        first = self.text[:self.cursor.line]
-        last = self.text[self.cursor.line+1:]
-        
-        self.text = first + last
+        self.text = self.concatenate(self.text, self.cursor.line, self.cursor.line+1)
         self.cursorUp()
         
-    def concatenate(self, first, last, filler = ""):
-        return first + filler + last
+    def concatenate(self, toCut, firstCut, lastCut, filler = ""):
+        return toCut[:firstCut] + filler + toCut[lastCut:]
         
     def save(self):
         """  """
