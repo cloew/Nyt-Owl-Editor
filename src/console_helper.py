@@ -18,6 +18,7 @@ RIGHT_ARROW = 67
 LEFT_ARROW = 68
 
 def getch():
+    """ Retrieves a single character from the command line """
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
@@ -26,3 +27,7 @@ def getch():
     finally:
         termios.tcsetattr(sys.stdin.fileno(), termios.TCSADRAIN, old_settings)
     return ch
+    
+def cls():
+    """ Clears the console """
+    sys.stdout.write("\033c")

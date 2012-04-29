@@ -1,17 +1,17 @@
+from console_helper import cls
+
 import os
 
 class Screen:
     """ Represents the screen for the Text Editor """
-    NUM_LINES = 10
+    NUM_LINES = 20
     
     def __init__(self, parent):
         self.parent = parent
     
     def printScreen(self):
         """ Main loop for the Text Editor """
-        os.system('cls')
-        print "\033c"
-        #print "\r"
+        cls()
         print "Current file: %s | Line: %d | Col: %d\r" % (self.parent.filename, self.parent.cursor.line, self.parent.cursor.col)
             
         self.printText()
