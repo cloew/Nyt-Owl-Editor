@@ -22,8 +22,16 @@ class Screen:
         if startLine < 0:
             startLine = 0
             
-        for line in self.parent.text[startLine:startLine + self.NUM_LINES]:
-            print line, "\r"
+        endLine = startLine + self.NUM_LINES
+        if endLine >= len(self.parent.text):
+            endLine = len(self.parent.text)
+            
+        maxLength = len(str(endLine - 1))
+        for i in range(startLine, endLine):
+            lineNumber = str(i)
+            lineNumber = lineNumber.zfill(maxLength)
+            line = self.parent.text[i]
+            print "%s: %s\r" % (lineNumber, line)
         
     def getLinesToPrint(self):
         """ Returns the number of printable lines """
