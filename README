@@ -1,1 +1,12 @@
 NytRam Editor to take a stab at creating a better Python IDE with improved auto-complete and interactive programming styles.
+
+----------------------
+|Python Auto Complete|
+----------------------
+
+Goal for Python auto-complete is to get it to work with variables passed into functions.
+Since Python is typeless the few IDEs with auto complete I've used don't provide any help for function arguments.
+
+The plan for Nyt Owl's auto complete is to have the IDE search all Python files in user-defined directories,
+and when the user is editting the function it will take a look at all the objects passed to the function and
+provide auto complete for all the functions the objects have in commmon.
