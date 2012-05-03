@@ -2,13 +2,26 @@ from nytowl import NytOwlTextEditor
 
 import sys
 
+
+def processArgs(args):
+    """ Processes the arguments passed on the command line """
+    filename = None
+    debug = False
+    
+    for i in range(len(args)):
+        cmd = args[i]
+        if cmd == "-f":
+            filename = args[i+1]
+            
+        elif cmd == "-d":
+            debug = True
+
+    return filename, debug
+    
 def main(args):
     """   """
-    if len(args) > 0:
-        n = NytOwlTextEditor(filename = args[0])
-    else:
-        n = NytOwlTextEditor()
-        
+    filename, debug = processArgs(args)
+    n = NytOwlTextEditor(filename, debug)
     n.run()
     
     

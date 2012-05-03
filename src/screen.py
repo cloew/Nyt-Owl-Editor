@@ -6,12 +6,15 @@ class Screen:
     """ Represents the screen for the Text Editor """
     NUM_LINES = 20
     
-    def __init__(self, parent):
+    def __init__(self, parent, debug):
         self.parent = parent
+        self.debugging = debug
     
     def printScreen(self):
         """ Main loop for the Text Editor """
-        #cls()
+        if not self.debugging:
+            cls()
+            
         print "Current file: %s | Line: %d | Col: %d\r" % (self.parent.filename, self.parent.cursor.line, self.parent.cursor.col)
             
         self.printText()

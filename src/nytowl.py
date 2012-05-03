@@ -7,7 +7,7 @@ from console_helper import *
 class NytOwlTextEditor:
     """ The NytOwl Text Editor """
     
-    def __init__(self, filename = None):
+    def __init__(self, filename, debug):
         """  """
         self.filename = filename
         
@@ -22,22 +22,10 @@ class NytOwlTextEditor:
                 print "Unable to open file"
                 
         self.cursor = Cursor()
-        self.inputProcessor = InputProcessor(self)
-        self.screen = Screen(self)
+        self.inputProcessor = InputProcessor(self, debug)
+        self.screen = Screen(self, debug)
         
         self.running = True
-        
-        
-        self.cmds = {UP_ARROW:self.cursorUp,
-                           DOWN_ARROW:self.cursorDown,
-                           LEFT_ARROW:self.cursorLeft,
-                           RIGHT_ARROW:self.cursorRight,
-                           CTRL_S:self.save, 
-                           ESCAPE:self.exit,
-                           ENDL:self.addLine,
-                           TAB:self.addTab,
-                           BACKSPACE:self.remove,
-                           DELETE:self.delete}
         
     def run(self):
         """ Runs the program """
