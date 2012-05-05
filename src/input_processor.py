@@ -51,6 +51,6 @@ class InputProcessor:
     def getInput(self):
         """ Gets a char and its ord """
         c = getch()
-        print ord(c), "\r"
+        #print ord(c), "\r"
         val = ord(c)
         return c, val
