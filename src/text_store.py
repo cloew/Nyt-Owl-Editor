@@ -10,7 +10,9 @@ class TextStore:
         if not filename is None:
             try:
                 file = open(filename, 'r')
-                self.text = file.readlines()
+                self.text = []
+                for line in file.readlines():
+                    self.text.append(line.rstrip('\n'))
                 file.close()
             except IOError:
                 print "Unable to open file"
