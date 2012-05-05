@@ -3,8 +3,9 @@ from console_helper import *
 class InputProcessor:
     """ Processor of command line input """
     
-    def __init__(self, parent):
+    def __init__(self, parent, debug):
         """ Set up the Input Processor """
+        self.debugging = debug
         self.addString = parent.addString
         self.cmds = {CTRL_S:parent.save, 
                            ESCAPE:self.processEscape,
@@ -51,6 +52,9 @@ class InputProcessor:
     def getInput(self):
         """ Gets a char and its ord """
         c = getch()
-        #print ord(c), "\r"
         val = ord(c)
+        
+        if self.debugging:
+            print val, "\r"
+        
         return c, val
