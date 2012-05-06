@@ -32,6 +32,14 @@ class Cursor:
         """ Moves the cursor right one column """
         if self.col < self.textStore.lastColumn(self.line):
             self.col += 1
+            
+    def toStartOfLine(self):
+        """ Moves the cursor column to the start of the current line """
+        self.col = 0
+        
+    def toEndOfLine(self):
+        """ Moves the cursor column to the end of the current line """
+        self.col = self.textStore.lastColumn(self.line)
     
     def normalizeCol(self):
         """ Normalize Column """

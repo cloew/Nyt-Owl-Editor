@@ -46,6 +46,14 @@ class NytOwlTextEditor:
         """ Moves cursor right one column """
         self.cursor.right(len(self.textStore.text[self.cursor.line]))
         
+    def cursorStart(self):
+        """ Move cursor to the start of the line """
+        self.cursor.toStartOfLine()
+        
+    def cursorEnd(self):
+        """ Move cursor to the end of the line """
+        self.cursor.toEndOfLine()
+        
     def currentLine(self):
         """ Returns the current line """
         return self.textStore.text[self.cursor.line]

@@ -21,7 +21,9 @@ class InputProcessor:
                                    DOWN_ARROW:parent.cursorDown,
                                    LEFT_ARROW:parent.cursorLeft,
                                    RIGHT_ARROW:parent.cursorRight,
-                                   DELETE:parent.delete}
+                                   DELETE:parent.delete,
+                                   HOME:parent.cursorStart,
+                                   END:parent.cursorEnd}
         
     def processInput(self):
         """ Processes the command line input """
