@@ -1,5 +1,3 @@
-
-
 def test_func():
     """  """
     a = 0
@@ -8,8 +6,4 @@ def test_func():
     
     a += 2
     
-    a += 3
-    
-    
-if __name__ == "__main__":
-    test_func()
+    a += -8
