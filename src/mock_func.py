@@ -11,6 +11,7 @@ class MockFunc:
         self.filename = filename
         self.func = func
 
+        # This version is a multi-line version.
         # self.func_regex = r'^[ \t]*def[ \t]+{function_name!s}[ \t]*\(.*(,[ \t]*\n)*.*\)[ \t]*:'.format(function_name = func)
 
         self.func_regex = r'^[ \t]*def[ \t]+{func_name!s}[ \t]*\(.*'.format(func_name = func)
