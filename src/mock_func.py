@@ -2,6 +2,7 @@ import re
 
 class MockFunc:
     """ Mocks a function """
+    ops = ["-=", "+=", "*=", "/="]
 
     def __init__(self, filename, func):
         """  """
@@ -25,18 +26,64 @@ class MockFunc:
         
         for line in lines[funcStart+1:]:
             line = line.strip()
-            print line
             
             if not line.find("+=") == -1:
-                self.code.append(line)
+                codeLine = self.cleanArgs(line)
+                self.code.append(codeLine)
             elif not line.find("=") == -1:
                 index = line.find("=")
                 varName = line[0:index].strip()
                 value = line[index+1:].strip()
-                execStr = "self.vars[{0}]".format('"'+varName + '"') + "=" + value
+                
+                valueStr = self.cleanArgs(value)
+                execStr = "self.vars[{0}] = {1}".format('"'+varName + '"', valueStr)
                 exec(execStr)
-                print value
-            
+            else:
+                codeLine = self.cleanArgs(line)
+                self.code.append(codeLine)
+                
+    def cleanArgs(self, line):
+        """  Replace variables in the line with the dictionary equivalent """
+        words = self.cutLine(line)
+        for i in range(len(words)):
+            word = words[i]
+            for key in self.vars.keys():
+                if word == key:
+                    words[i] = 'self.vars["{0}"]'.format(key)
+                    
+        cleanedLine = ""
+        for word in words:
+            cleanedLine += word
+        return cleanedLine
+        
+    def cutLine(self, line):
+        """ Cuts a string on all separating whatchamahoosits """
+        words = line.split()
+        tempWords = []
+        for word in words:
+            tempWords.append(word)
+            if not word == words[-1]:
+                tempWords += [" "]
+        words = tempWords
+        
+        for c in [".", "*", "+", "-", "=", "/", "[", "]", ","]:
+            words = self.cutWord(words, c)
+               
+        return words
+                    
+    def cutWord(self, words, sep):
+        """ """
+        tempWords = []
+        for word in words:
+            splitWord = word.split(sep)
+            for i in range(len(splitWord)):
+                piece = splitWord[i]
+                tempWords.append(piece)
+                if not i == (len(splitWord)-1):
+                    tempWords += [sep]
+                    
+        return tempWords
+        
 
     def loadFile(self):
         try:
@@ -56,18 +103,18 @@ class MockFunc:
                 
     def play(self):
         """ Plays the code """
+        print "Playing"
         print self.vars
         for line in self.code:
-            opIndex = line.find("+=")
-            varName = line[0:opIndex].strip()
-            value = line[opIndex+2:]
-            execStr = "self.vars[{0}]".format('"'+varName + '"') + "+=" + value
-            exec(execStr)
+            print 
+            print "Executing:", line
+            #execStr = self.cleanArgs(line)
+            exec(line)
             print self.vars
             
             
                 
 if __name__ == "__main__":
     m = MockFunc("test_func.py", "test_func")
-    print "\n\n\n\n\n\n"
+    #print "\n\n\n\n\n\n"
     m.play()
