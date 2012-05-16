@@ -1,4 +1,7 @@
+import os
 import re
+
+from console_helper import cls
 
 class MockFunc:
     """ Mocks a function """
@@ -6,8 +9,7 @@ class MockFunc:
 
     def __init__(self, filename, func):
         """  """
-        self.vars = {}
-        self.code = []
+        self.clear()
 
         self.filename = filename
         self.func = func
@@ -18,9 +20,16 @@ class MockFunc:
         self.func_regex = r'^[ \t]*def[ \t]+{func_name!s}[ \t]*\(.*'.format(func_name = func)
 
         self.loadCode()
+        
+    def clear(self):
+        """ Set code and vars to default """
+        self.vars = {}
+        self.code = []
 
     def loadCode(self):
         """ Loads the code from the file """
+        self.clear()
+        
         lines = self.loadFile()
         funcStart = self.findFunc(lines)
         
@@ -86,13 +95,19 @@ class MockFunc:
         
 
     def loadFile(self):
-        try:
-            file = open(self.filename, 'r')
-        except IOError:
-            print "Unable to open file"
-            exit(-1)
+        lines = []
+        
+        while lines == []:
+            try:
+                file = open(self.filename, 'r')
+                lines = file.readlines()
+            except IOError:
+                print "Unable to open file"
+                exit(-1)
+            finally:
+                file.close()
 
-        return file.readlines()
+        return lines
 
     def findFunc(self, lines):
         for i in range(len(lines)):
@@ -101,11 +116,27 @@ class MockFunc:
             if matchObj:
                 return i
                 
+    def run(self):
+        """ Loop and Play the function whenever it is updated """
+        self.lastTime = 0
+        
+        while True:
+            currTime = os.path.getmtime(self.filename)
+            if self.lastTime < currTime:
+                cls()
+                self.lastTime = currTime
+                self.loadCode()
+                self.play()
+        
+                
     def play(self):
         """ Plays the code """
-        print "Playing"
+        print "Playing", self.func
         print self.vars
         for line in self.code:
+            if not "self.vars[" in line:
+                continue
+                
             print 
             print "Executing:", line
             #execStr = self.cleanArgs(line)
@@ -117,4 +148,4 @@ class MockFunc:
 if __name__ == "__main__":
     m = MockFunc("test_func.py", "test_func")
     #print "\n\n\n\n\n\n"
-    m.play()
+    m.run()

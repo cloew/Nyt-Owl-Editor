@@ -1,8 +1,4 @@
 def test_func():
-    """  """
-    a = ["0"]
-    a += ["1"]
+    a = "This is magic"
+    b = "What now!!!"
     
-    b = "abc"
-    c = [a, b]
-    c.append("h")
