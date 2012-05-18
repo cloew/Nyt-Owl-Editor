@@ -1,19 +1,20 @@
 import os
 import re
 
-from console_helper import cls
+#from console_helper import cls
 
 class MockFunc:
     """ Mocks a function """
     ops = ["-=", "+=", "*=", "/="]
 
-    def __init__(self, filename, func):
+    def __init__(self, func, filename=None, lines=None):
         """  """
         self.clear()
 
         self.filename = filename
+        self.lines= lines
         self.func = func
-
+        print self.lines
         # This version is a multi-line version.
         # self.func_regex = r'^[ \t]*def[ \t]+{function_name!s}[ \t]*\(.*(,[ \t]*\n)*.*\)[ \t]*:'.format(function_name = func)
 
@@ -30,7 +31,7 @@ class MockFunc:
         """ Loads the code from the file """
         self.clear()
         
-        lines = self.loadFile()
+        lines = self.getLines()
         funcStart = self.findFunc(lines)
         
         for line in lines[funcStart+1:]:
@@ -92,7 +93,13 @@ class MockFunc:
                     tempWords += [sep]
                     
         return tempWords
-        
+
+    def getLines(self):
+        print self.lines
+        if not self.lines is None:
+            return self.lines
+        else:
+            return self.loadFile()
 
     def loadFile(self):
         lines = []
