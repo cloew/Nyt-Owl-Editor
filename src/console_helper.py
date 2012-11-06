@@ -1,5 +1,7 @@
 import sys, tty, termios
 
+import curses
+
 ESCAPE = 27
 ARROW_ESCAPE = 91
 ENDL = 13

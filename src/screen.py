@@ -18,8 +18,7 @@ class Screen:
         if not self.debugging:
             cls()
             
-        print "Current file: %s | Line: %d | Col: %d\r" % (self.parent.filename, self.parent.cursor.line, self.parent.cursor.col)
-            
+        print "{t.clear}Current file: {0} | Line: {1} | Col: {2}\r".format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)
         self.printText()
         
     def printText(self):
@@ -40,11 +39,7 @@ class Screen:
             if i == self.parent.cursor.line:
                 self.printCursorLine(line, lineNumber)
             else:
-                self.printLine(line, lineNumber)
-            
-    def printLine(self, line, lineNumber):
-        """ Prints a single line to the console """
-        print "%s: %s\r" % (lineNumber, line)
+                self.printTextLine(line, lineNumber)
         
     def printCursorLine(self, line, lineNumber):
         """ Prints a single line with the cursor to the console """
@@ -55,7 +50,12 @@ class Screen:
         else:
             cursor = self.terminal.reverse(" ")
             afterCursor = ""
-        print "%s: %s%s%s\r" % (lineNumber, beforeCursor, cursor, afterCursor)
+        #print "%s: %s%s%s\r" % (lineNumber, beforeCursor, cursor, afterCursor)
+        self.printTextLine("{0}{1}{2}".format(beforeCursor, cursor, afterCursor), lineNumber)
+        
+    def printTextLine(self, line, lineNumber):
+        """  """
+        print "{0}: {1}{t.normal}\r".format(lineNumber, line, t=self.terminal)
         
     def getLinesToPrint(self):
         """ Returns the number of printable lines """

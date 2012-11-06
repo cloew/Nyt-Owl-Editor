@@ -1,5 +1,7 @@
 from console_helper import *
 
+import curses
+
 class InputProcessor:
     """ Processor of command line input """
     
