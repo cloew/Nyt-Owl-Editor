@@ -1,5 +1,6 @@
 from console_helper import cls
 
+from blessings import Terminal
 import os
 
 class Screen:
@@ -10,6 +11,7 @@ class Screen:
         self.parent = parent
         self.textStore = parent.textStore
         self.debugging = debug
+        self.terminal = Terminal()
     
     def printScreen(self):
         """ Main loop for the Text Editor """
@@ -35,7 +37,25 @@ class Screen:
             lineNumber = str(i)
             lineNumber = lineNumber.zfill(maxLength)
             line = self.textStore.getLine(i)
-            print "%s: %s\r" % (lineNumber, line)
+            if i == self.parent.cursor.line:
+                self.printCursorLine(line, lineNumber)
+            else:
+                self.printLine(line, lineNumber)
+            
+    def printLine(self, line, lineNumber):
+        """ Prints a single line to the console """
+        print "%s: %s\r" % (lineNumber, line)
+        
+    def printCursorLine(self, line, lineNumber):
+        """ Prints a single line with the cursor to the console """
+        beforeCursor = line[:self.parent.cursor.col]
+        if self.parent.cursor.col < len(line):
+            cursor = self.terminal.reverse(line[self.parent.cursor.col])
+            afterCursor = line[self.parent.cursor.col+1:]
+        else:
+            cursor = self.terminal.reverse(" ")
+            afterCursor = ""
+        print "%s: %s%s%s\r" % (lineNumber, beforeCursor, cursor, afterCursor)
         
     def getLinesToPrint(self):
         """ Returns the number of printable lines """
