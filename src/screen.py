@@ -18,7 +18,7 @@ class Screen:
         if not self.debugging:
             cls()
             
-        print "Current file: {0} | Line: {1} | Col: {2}\r".format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)
+        print "{t.clear}Current file: {0} | Line: {1} | Col: {2}\r".format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)
         self.printText()
         
     def printText(self):

@@ -42,7 +42,6 @@ def getMetaCharacter():
     
 def processMetaCharacter(char, metaChars):
     """ Processes an escaped meta-data character """
-    print char, metaChars
     dict = MetaCharToKAO
     if char == ESCAPE and len(metaChars) > 0 and metaChars[0] == ARROW_ESCAPE:
         for metaChar in metaChars:
