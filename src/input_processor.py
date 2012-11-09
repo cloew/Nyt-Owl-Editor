@@ -1,7 +1,6 @@
-from console_helper import *
-
 import curses.ascii
-from kao_console_constants import *
+from kao_console import getch
+from kao_console.ascii import *
 
 class InputProcessor:
     """ Processor of command line input """
