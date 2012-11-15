@@ -3,8 +3,6 @@ from input_processor import InputProcessor
 from screen import Screen
 from text_store import TextStore
 
-from console_helper import *
-
 class NytOwlTextEditor:
     """ The NytOwl Text Editor """
     

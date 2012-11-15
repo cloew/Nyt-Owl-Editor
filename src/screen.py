@@ -1,4 +1,4 @@
-from console_helper import cls
+from kao_console import cls
 
 from blessings import Terminal
 import os
