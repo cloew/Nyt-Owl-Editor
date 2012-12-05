@@ -1,17 +1,18 @@
 from kao_console import cls
-
+from text_window import TextWindow
 from blessings import Terminal
 import os
 
 class Screen:
     """ Represents the screen for the Text Editor """
-    NUM_LINES = 20
+    #NUM_LINES = 20
     
     def __init__(self, parent, debug):
         self.parent = parent
         self.textStore = parent.textStore
         self.debugging = debug
         self.terminal = Terminal()
+        self.textWindow = TextWindow()
     
     def printScreen(self):
         """ Main loop for the Text Editor """
@@ -23,11 +24,10 @@ class Screen:
         
     def printText(self):
         """ Prints a section text from the file """
-        startLine = self.parent.cursor.line - self.NUM_LINES/2
-        if startLine < 0:
-            startLine = 0
-            
-        endLine = startLine + self.NUM_LINES
+        self.textWindow.prepareWindow(self.parent.cursor, self.terminal)
+        startLine = self.textWindow.top_line
+        endLine = self.textWindow.top_line + self.textWindow.window_height
+
         if endLine > self.textStore.numLines():
             endLine = self.textStore.numLines()
             
@@ -39,19 +39,30 @@ class Screen:
             if i == self.parent.cursor.line:
                 self.printCursorLine(line, lineNumber)
             else:
-                self.printTextLine(line, lineNumber)
+                self.printNormalLine(line, lineNumber)
         
     def printCursorLine(self, line, lineNumber):
         """ Prints a single line with the cursor to the console """
-        beforeCursor = line[:self.parent.cursor.col]
+        startCol = self.textWindow.left_col
+        endCol = self.textWindow.left_col + self.textWindow.window_width
+
+        beforeCursor = line[startCol:self.parent.cursor.col]
         if self.parent.cursor.col < len(line):
             cursor = self.terminal.reverse(line[self.parent.cursor.col])
-            afterCursor = line[self.parent.cursor.col+1:]
+            afterCursor = line[self.parent.cursor.col+1:endCol]
         else:
             cursor = self.terminal.reverse(" ")
             afterCursor = ""
         #print "%s: %s%s%s\r" % (lineNumber, beforeCursor, cursor, afterCursor)
         self.printTextLine("{0}{1}{2}".format(beforeCursor, cursor, afterCursor), lineNumber)
+
+    def printNormalLine(self, line, lineNumber):
+        """ Prints a single line to the console """
+        startCol = self.textWindow.left_col
+        endCol = self.textWindow.left_col + self.textWindow.window_width
+
+        beforeCursor = line[startCol:self.parent.cursor.col]
+        self.printTextLine(line[startCol:endCol], lineNumber)
         
     def printTextLine(self, line, lineNumber):
         """  """

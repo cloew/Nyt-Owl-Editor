@@ -11,8 +11,8 @@ class TextWindow:
 
     def prepareWindow(self, cursor, terminal):
         """ Prepares the window with the current cursor and terminal """
-        self.window_height = terminal.height
-        self.window_width = terminal.width
+        self.window_height = terminal.height - 2
+        self.window_width = terminal.width - 2
         self.checkCursorLocation(cursor)
 
     def checkCursorLocation(self, cursor):
@@ -32,4 +32,4 @@ class TextWindow:
         if cursor.col < self.left_col:
             self.left_col = cursor.col
         elif cursor.col >= (self.left_col+self.window_width):
-            self.left_col = cursor.col-self.window_width + 1 # Not sure if this is right
+            self.left_col = cursor.col-self.window_width + 1 # Not sure if this is right # May need magic to deal offset from the line number
