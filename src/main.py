@@ -10,11 +10,10 @@ def processArgs(args):
     
     for i in range(len(args)):
         cmd = args[i]
-        if cmd == "-f":
-            filename = args[i+1]
-            
-        elif cmd == "-d":
+        if cmd == "-d":
             debug = True
+        else:
+            filename = cmd
 
     return filename, debug
     
