@@ -16,11 +16,29 @@ class Cursor:
             
         self.normalizeCol()
             
-    def down(self, max):
+    def jumpUp(self, linesToJump):
+        """ Jumps the cursor down the given number of lines """
+        if (self.line-linesToJump) > 0:
+            self.line -= linesToJump
+        else:
+            self.line = 0
+
+        self.normalizeCol()
+
+    def down(self):
         """ Move the cursor down a line """
         if self.line < self.textStore.lastLine():
             self.line += 1
             
+        self.normalizeCol()
+
+    def jumpDown(self, linesToJump):
+        """ Jumps the cursor down the given number of lines """
+        if (self.line+linesToJump) < self.textStore.lastLine():
+            self.line += linesToJump
+        else:
+            self.line = self.textStore.lastLine()
+
         self.normalizeCol()
             
     def left(self):
@@ -28,7 +46,7 @@ class Cursor:
         if self.col > 0:
             self.col -= 1
     
-    def right(self, max):
+    def right(self):
         """ Moves the cursor right one column """
         if self.col < self.textStore.lastColumn(self.line):
             self.col += 1

@@ -10,17 +10,19 @@ class InputProcessor:
         self.debugging = debug
         self.addString = parent.addString
         self.cmds = {CTRL_S:parent.save, 
-                           ESCAPE:parent.exit,#self.processEscape,
-                           ENDL:parent.addLine,
-                           TAB:parent.addTab,
-                           BACKSPACE:parent.remove,
-                           KAO_UP:parent.cursorUp,
-                           KAO_DOWN:parent.cursorDown,
-                           KAO_LEFT:parent.cursorLeft,
-                           KAO_RIGHT:parent.cursorRight,
-                           KAO_DELETE:parent.delete,
-                           KAO_HOME:parent.cursorStart,
-                           KAO_END:parent.cursorEnd}
+                     ESCAPE:parent.exit,#self.processEscape,
+                     ENDL:parent.addLine,
+                     TAB:parent.addTab,
+                     BACKSPACE:parent.remove,
+                     KAO_UP:parent.cursorUp,
+                     KAO_DOWN:parent.cursorDown,
+                     KAO_LEFT:parent.cursorLeft,
+                     KAO_RIGHT:parent.cursorRight,
+                     KAO_DELETE:parent.delete,
+                     KAO_HOME:parent.cursorStart,
+                     KAO_END:parent.cursorEnd,
+                     KAO_PAGE_UP:parent.cursorPageUp,
+                     KAO_PAGE_DOWN:parent.cursorPageDown}
         
     def processInput(self):
         """ Processes the command line input """
@@ -38,4 +40,4 @@ class InputProcessor:
         if self.debugging:
             print val, "\r"
         
-        return val
+        return val        

@@ -34,7 +34,7 @@ class NytOwlTextEditor:
         
     def cursorDown(self):
         """ Moves cursor down one line """
-        self.cursor.down(len(self.textStore.text))
+        self.cursor.down()
     
     def cursorLeft(self):
         """ Moves cursor left one column """
@@ -42,7 +42,7 @@ class NytOwlTextEditor:
         
     def cursorRight(self):
         """ Moves cursor right one column """
-        self.cursor.right(len(self.textStore.text[self.cursor.line]))
+        self.cursor.right()
         
     def cursorStart(self):
         """ Move cursor to the start of the line """
@@ -51,6 +51,14 @@ class NytOwlTextEditor:
     def cursorEnd(self):
         """ Move cursor to the end of the line """
         self.cursor.toEndOfLine()
+
+    def cursorPageUp(self):
+        """ Move the cursor up a page """
+        self.cursor.jumpUp(self.screen.textWindow.window_height)
+
+    def cursorPageDown(self):
+        """ Move the cursor down a page """
+        self.cursor.jumpDown(self.screen.textWindow.window_height)
         
     def currentLine(self):
         """ Returns the current line """
