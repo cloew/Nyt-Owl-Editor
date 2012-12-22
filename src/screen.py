@@ -16,10 +16,12 @@ class Screen:
     
     def printScreen(self):
         """ Main loop for the Text Editor """
+        headerString = "Current file: {t.blue}{0}{t.normal} | Line: {1} | Col: {2}\r"
         if not self.debugging:
             cls()
+            headerString = "{t.clear}" + headerString
             
-        print "{t.clear}Current file: {0} | Line: {1} | Col: {2}\r".format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)
+        print headerString.format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)
         self.printText()
         
     def printText(self):
