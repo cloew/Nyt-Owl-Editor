@@ -14,7 +14,7 @@ class TextLineWidget(ConsoleWidget):
         
     def draw(self):
         """ Draw the Widget """
-        self.printTextLine(self.line)
+        self.printTextLine(self.line[self.startCol:self.endCol])
         
     def printTextLine(self, line):
         """  """
