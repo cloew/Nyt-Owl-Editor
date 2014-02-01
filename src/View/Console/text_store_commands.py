@@ -3,7 +3,7 @@ from kao_console.ascii import *
 from string import printable
 
 def GetTextStoreCommands(editor):
-    """ Return the Text Stores """
+    """ Return the Text Store Commands """
     commands = {}
     for character in printable:
         commands[character] = editor.addString

@@ -1,6 +1,7 @@
 from nytowl import NytOwlTextEditor
 from nytowl_screen import NytowlScreen
 
+from View.Console.cursor_commands import GetCursorCommands
 from View.Console.text_store_commands import GetTextStoreCommands
 from View.Console.TextStore.text_window import TextWindow
 
@@ -16,14 +17,7 @@ class NytowlController(ConsoleController):
         self.editor = NytOwlTextEditor(filename, textWindow)
         
         commands = GetTextStoreCommands(self.editor)
-        commands.update({KAO_UP:self.editor.cursorUp,
-                         KAO_DOWN:self.editor.cursorDown,
-                         KAO_LEFT:self.editor.cursorLeft,
-                         KAO_RIGHT:self.editor.cursorRight,
-                         KAO_HOME:self.editor.cursorStart,
-                         KAO_END:self.editor.cursorEnd,
-                         KAO_PAGE_UP:self.editor.cursorPageUp,
-                         KAO_PAGE_DOWN:self.editor.cursorPageDown})
+        commands.update(GetCursorCommands(self.editor))
         
         screen = NytowlScreen(self.editor)
         ConsoleController.__init__(self, screen, commands=commands)
