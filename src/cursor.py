@@ -56,9 +56,18 @@ class Cursor:
         self.toStartOfLine()
         self.toTopOfFile()
         
+    def toEndOfFile(self):
+        """ Move the cursor to the end of the file """
+        self.toBottomOfFile()
+        self.toEndOfLine()
+        
     def toTopOfFile(self):
         """ Move the cursor row to the top line of the file """
         self.line = 0
+        
+    def toBottomOfFile(self):
+        """ Move the cursor row to the bottom line of the file """
+        self.line = self.textStore.lastLine()
             
     def toStartOfLine(self):
         """ Moves the cursor column to the start of the current line """
