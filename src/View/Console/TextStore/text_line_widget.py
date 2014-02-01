@@ -17,5 +17,7 @@ class TextLineWidget(ConsoleWidget):
         self.printTextLine(self.line[self.startCol:self.endCol])
         
     def printTextLine(self, line):
-        """  """
-        print "{0}: {1}{t.normal}\r".format(self.lineNumber, line, t=Window.terminal)
+        """ Print the given text line with a line number """
+        text = "{0}: {1}".format(self.lineNumber, line)
+        text = text.replace('\r', '')
+        print "{0}{t.normal}\r".format(text, t=Window.terminal)
