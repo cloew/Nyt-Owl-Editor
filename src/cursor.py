@@ -76,6 +76,16 @@ class Cursor:
     def toEndOfLine(self):
         """ Moves the cursor column to the end of the current line """
         self.col = self.textStore.lastColumn(self.line)
+        
+    def toNextWord(self):
+        """ Move the cursor to the start of the next word """
+        foundPotentialCharacterBeforeWord = False
+        for character in self.textStore.text[self.line][self.col:]:
+            if character == ' ':
+                foundPotentialCharacterBeforeWord = True
+            elif foundPotentialCharacterBeforeWord and character != ' ':
+                break
+            self.right()
     
     def normalizeCol(self):
         """ Normalize Column """

@@ -54,6 +54,10 @@ class NytOwlTextEditor:
         """ Move the cursor to the start of the file """
         self.cursor.toEndOfFile()
         
+    def cursorNextWord(self, event=None):
+        """ Move the cursor to the next word """
+        self.cursor.toNextWord()
+        
     def currentLine(self):
         """ Returns the current line """
         return self.textStore.text[self.cursor.line]
