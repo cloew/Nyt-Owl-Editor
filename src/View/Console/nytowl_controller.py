@@ -5,7 +5,6 @@ from View.Console.cursor_commands import GetCursorCommands
 from View.Console.text_store_commands import GetTextStoreCommands
 from View.Console.TextStore.text_window import TextWindow
 
-from kao_console.ascii import *
 from kao_gui.console.console_controller import ConsoleController
 
 class NytowlController(ConsoleController):

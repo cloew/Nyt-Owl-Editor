@@ -1,4 +1,3 @@
-from nytowl import NytOwlTextEditor
 from View.Console.nytowl_controller import NytowlController
 from kao_gui.console.window import Window
 
@@ -25,9 +24,6 @@ def main(args):
     with Window.window():
         controller = NytowlController(filename)
         controller.run()
-        # n = NytOwlTextEditor(filename, debug)
-        # n.run()
-    
     
 if __name__ == "__main__":
     main(sys.argv[1:])

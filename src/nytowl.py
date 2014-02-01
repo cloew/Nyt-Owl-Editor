@@ -1,6 +1,4 @@
 from cursor import Cursor
-from input_processor import InputProcessor
-from screen import Screen
 from text_store import TextStore
 
 class NytOwlTextEditor:
