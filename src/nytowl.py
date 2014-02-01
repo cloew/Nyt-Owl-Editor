@@ -40,11 +40,11 @@ class NytOwlTextEditor:
 
     def cursorPageUp(self, event=None):
         """ Move the cursor up a page """
-        self.cursor.jumpUp(self.screen.textWindow.window_height)
+        self.cursor.jumpUp(self.textWindow.window_height)
 
     def cursorPageDown(self, event=None):
         """ Move the cursor down a page """
-        self.cursor.jumpDown(self.screen.textWindow.window_height)
+        self.cursor.jumpDown(self.textWindow.window_height)
         
     def currentLine(self):
         """ Returns the current line """
