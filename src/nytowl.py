@@ -14,39 +14,39 @@ class NytOwlTextEditor:
         self.textStore = TextStore(filename)
         self.cursor = Cursor(self.textStore)
             
-    def cursorUp(self, event):
+    def cursorUp(self, event=None):
         """ Moves cursor up one line """
         self.cursor.up()
         
-    def cursorDown(self, event):
+    def cursorDown(self, event=None):
         """ Moves cursor down one line """
         self.cursor.down()
     
-    def cursorLeft(self, event):
+    def cursorLeft(self, event=None):
         """ Moves cursor left one column """
         self.cursor.left()
         
-    def cursorRight(self, event):
+    def cursorRight(self, event=None):
         """ Moves cursor right one column """
         self.cursor.right()
         
-    def cursorStart(self, event):
+    def cursorStart(self, event=None):
         """ Move cursor to the start of the line """
         self.cursor.toStartOfLine()
         
-    def cursorEnd(self, event):
+    def cursorEnd(self, event=None):
         """ Move cursor to the end of the line """
         self.cursor.toEndOfLine()
 
-    def cursorPageUp(self, event):
+    def cursorPageUp(self, event=None):
         """ Move the cursor up a page """
         self.cursor.jumpUp(self.screen.textWindow.window_height)
 
-    def cursorPageDown(self, event):
+    def cursorPageDown(self, event=None):
         """ Move the cursor down a page """
         self.cursor.jumpDown(self.screen.textWindow.window_height)
         
-    def currentLine(self, event):
+    def currentLine(self):
         """ Returns the current line """
         return self.textStore.text[self.cursor.line]
                 
@@ -74,18 +74,18 @@ class NytOwlTextEditor:
         self.cursorDown()
         self.cursor.col = 0
         
-    def addTab(self):
+    def addTab(self, event=None):
         """ Adds a Tab at the current cursor location """
         self.addString(" "*4)
         
-    def remove(self):
+    def remove(self, event=None):
         """ Removes a character from the line """
         if self.cursor.col == 0:
             self.removeLine()
         else:
             self.removeChar()
             
-    def delete(self):
+    def delete(self, event=None):
         """ Deletes a character """
         line = self.currentLine()
         if self.cursor.col == len(line):
