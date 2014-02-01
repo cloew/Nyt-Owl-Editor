@@ -60,7 +60,7 @@ class NytOwlTextEditor:
         for i in toAdd:
             self.cursorRight()
         
-    def addLine(self, event):
+    def addLine(self, event=None):
         """ Adds a new line to the file """
         line = self.currentLine()
         col = self.cursor.col
