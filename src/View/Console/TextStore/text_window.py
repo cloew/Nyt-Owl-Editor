@@ -23,12 +23,9 @@ class TextWindow:
     def prepareWindow(self, cursor):
         """ Prepares the window with the current cursor and terminal size """
         self.window_height = Window.terminal.height - 2
-        self.window_width = Window.terminal.width - 2 - len(str(max(self.right_col, cursor.col)))
-        self.checkCursorLocation(cursor)
-
-    def checkCursorLocation(self, cursor):
-        """ Check if the cursor is out of the window """
         self.checkCursorRow(cursor)
+        
+        self.window_width = Window.terminal.width - 2 - len(str(self.bottom_line-1))
         self.checkCursorColumn(cursor)
 
     def checkCursorRow(self, cursor):
@@ -36,11 +33,11 @@ class TextWindow:
         if cursor.line < self.top_line:
             self.top_line = cursor.line
         elif cursor.line >= self.bottom_line:
-            self.top_line = cursor.line-self.window_height + 1 # Not sure if this is right
+            self.top_line = cursor.line-self.window_height + 1
 
     def checkCursorColumn(self, cursor):
         """ Check if the cursor is in a column outside of the window """
         if cursor.col < self.left_col:
             self.left_col = cursor.col
         elif cursor.col >= self.right_col:
-            self.left_col = cursor.col-self.window_width + 1 # Not sure if this is right # May need magic to deal offset from the line number
+            self.left_col = cursor.col-self.window_width + 1
