@@ -7,11 +7,11 @@ from kao_gui.console.console_widget import ConsoleWidget
 class TextWidget(ConsoleWidget):
     """ Represents the view for a Text Widget """
     
-    def __init__(self, textStore, cursor):
+    def __init__(self, editor):
         """ Initialize the view """
-        self.cursor = cursor
-        self.textStore = textStore
-        self.textWindow = TextWindow()
+        self.cursor = editor.cursor
+        self.textStore = editor.textStore
+        self.textWindow = editor.textWindow
         
     def draw(self):
         """ Draw the Widget """

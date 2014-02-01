@@ -6,11 +6,11 @@ from kao_gui.console.window import Window
 class NytowlScreen(ConsoleWidget):
     """ Represents the view for the Nyt Owl Text Editor """
     
-    def __init__(self, filename, textStore, cursor):
+    def __init__(self, editor):
         """ Initialize the view """
-        self.filename = filename
-        self.cursor = cursor
-        self.textWidget = TextWidget(textStore, cursor)
+        self.filename = editor.filename
+        self.cursor = editor.cursor
+        self.textWidget = TextWidget(editor)
         
     def draw(self):
         """ Draw the Widget """

@@ -6,27 +6,13 @@ from text_store import TextStore
 class NytOwlTextEditor:
     """ The NytOwl Text Editor """
     
-    def __init__(self, filename, debug):
+    def __init__(self, filename, textWindow):
         """  """
         self.filename = filename
+        self.textWindow = textWindow
         
-        # Build delegates
         self.textStore = TextStore(filename)
         self.cursor = Cursor(self.textStore)
-        self.inputProcessor = InputProcessor(self, debug)
-        self.screen = Screen(self, debug)
-        
-        self.running = True
-        
-    def run(self):
-        """ Runs the program """
-        while(self.running):
-            self.loop()
-            
-    def loop(self):
-        """ Main loop for the Text Editor """
-        self.screen.printScreen()
-        self.inputProcessor.processInput()
             
     def cursorUp(self):
         """ Moves cursor up one line """

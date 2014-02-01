@@ -1,7 +1,7 @@
+from nytowl import NytOwlTextEditor
 from nytowl_screen import NytowlScreen
 
-from cursor import Cursor
-from text_store import TextStore
+from View.Console.TextStore.text_window import TextWindow
 
 from kao_gui.console.console_controller import ConsoleController
 
@@ -10,9 +10,8 @@ class NytowlController(ConsoleController):
     
     def __init__(self, filename):
         """ Initialize the Nyt Owl Text Editor Controller """
-        self.filename = filename
-        self.textStore = TextStore(filename)
-        self.cursor = Cursor(self.textStore)
+        textWindow = TextWindow()
+        self.editor = NytOwlTextEditor(filename, textWindow)
         
-        screen = NytowlScreen(self.filename, self.textStore, self.cursor)
+        screen = NytowlScreen(self.editor)
         ConsoleController.__init__(self, screen)
