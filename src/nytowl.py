@@ -14,39 +14,39 @@ class NytOwlTextEditor:
         self.textStore = TextStore(filename)
         self.cursor = Cursor(self.textStore)
             
-    def cursorUp(self):
+    def cursorUp(self, event):
         """ Moves cursor up one line """
         self.cursor.up()
         
-    def cursorDown(self):
+    def cursorDown(self, event):
         """ Moves cursor down one line """
         self.cursor.down()
     
-    def cursorLeft(self):
+    def cursorLeft(self, event):
         """ Moves cursor left one column """
         self.cursor.left()
         
-    def cursorRight(self):
+    def cursorRight(self, event):
         """ Moves cursor right one column """
         self.cursor.right()
         
-    def cursorStart(self):
+    def cursorStart(self, event):
         """ Move cursor to the start of the line """
         self.cursor.toStartOfLine()
         
-    def cursorEnd(self):
+    def cursorEnd(self, event):
         """ Move cursor to the end of the line """
         self.cursor.toEndOfLine()
 
-    def cursorPageUp(self):
+    def cursorPageUp(self, event):
         """ Move the cursor up a page """
         self.cursor.jumpUp(self.screen.textWindow.window_height)
 
-    def cursorPageDown(self):
+    def cursorPageDown(self, event):
         """ Move the cursor down a page """
         self.cursor.jumpDown(self.screen.textWindow.window_height)
         
-    def currentLine(self):
+    def currentLine(self, event):
         """ Returns the current line """
         return self.textStore.text[self.cursor.line]
                 
