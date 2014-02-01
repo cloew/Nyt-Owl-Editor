@@ -145,9 +145,5 @@ class NytOwlTextEditor:
         except IOError:
             print "Unable to open file"
             
-    def exit(self):
-        """ Exits the game """
-        self.running = False
-            
     def noFile(self):
         return self.filename is None
