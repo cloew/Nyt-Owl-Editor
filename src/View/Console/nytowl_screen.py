@@ -8,13 +8,13 @@ class NytowlScreen(ConsoleWidget):
     
     def __init__(self, editor):
         """ Initialize the view """
-        self.filename = editor.filename
+        self.editor = editor
         self.cursor = editor.cursor
         self.textWidget = TextWidget(editor)
         
     def draw(self):
         """ Draw the Widget """
         headerString = "{t.clear}Current file: {t.blue}{0}{t.normal} | Line: {1} | Col: {2}\r"
-        print headerString.format(self.filename, self.cursor.line, self.cursor.col, t=Window.terminal)
+        print headerString.format(self.editor.filename, self.cursor.line, self.cursor.col, t=Window.terminal)
         
         self.textWidget.draw()
