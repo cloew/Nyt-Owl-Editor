@@ -51,6 +51,15 @@ class Cursor:
         if self.col < self.textStore.lastColumn(self.line):
             self.col += 1
             
+    def toStartOfFile(self):
+        """ Move the cursor to the start of the file """
+        self.toStartOfLine()
+        self.toTopOfFile()
+        
+    def toTopOfFile(self):
+        """ Move the cursor row to the top line of the file """
+        self.line = 0
+            
     def toStartOfLine(self):
         """ Moves the cursor column to the start of the current line """
         self.col = 0

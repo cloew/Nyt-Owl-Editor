@@ -46,6 +46,10 @@ class NytOwlTextEditor:
         self.cursor.jumpDown(self.textWindow.window_height)
         self.textWindow.top_line = self.cursor.line
         
+    def cursorStartOfFile(self, event=None):
+        """ Move the cursor to the start of the file """
+        self.cursor.toStartOfFile()
+        
     def currentLine(self):
         """ Returns the current line """
         return self.textStore.text[self.cursor.line]

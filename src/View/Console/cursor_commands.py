@@ -11,4 +11,5 @@ def GetCursorCommands(editor):
             KAO_HOME:editor.cursorStart,
             KAO_END:editor.cursorEnd,
             KAO_PAGE_UP:editor.cursorPageUp,
-            KAO_PAGE_DOWN:editor.cursorPageDown}
+            KAO_PAGE_DOWN:editor.cursorPageDown,
+            KAO_CTRL_HOME:editor.cursorStartOfFile}
