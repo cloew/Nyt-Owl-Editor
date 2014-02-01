@@ -77,6 +77,18 @@ class Cursor:
         """ Moves the cursor column to the end of the current line """
         self.col = self.textStore.lastColumn(self.line)
         
+    def toPreviousWord(self):
+        """ Move the cursor to the start of the previous word """
+        foundPotentialStartOfWord = False
+        restOfLine = list(self.textStore.text[self.line][:self.col])
+        restOfLine.reverse()
+        for character in restOfLine:
+            if character != ' ':
+                foundPotentialStartOfWord = True
+            elif foundPotentialStartOfWord and character == ' ':
+                break
+            self.left()
+        
     def toNextWord(self):
         """ Move the cursor to the start of the next word """
         foundPotentialCharacterBeforeWord = False
