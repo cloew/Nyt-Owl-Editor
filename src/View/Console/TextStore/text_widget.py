@@ -40,10 +40,12 @@ class TextWidget(ConsoleWidget):
             line = self.textStore.getLine(i)
             lineNumber = self.getLineNumberString(endLine, i)
             if i == self.cursor.line:
-                widget = TextLineWidget(line, lineNumber, self.textWindow)
-            else:
                 widget = CursorTextLineWidget(line, lineNumber, self.textWindow, self.cursor)
+            else:
+                widget = TextLineWidget(line, lineNumber, self.textWindow)
             lineWidgets.append(widget)
+            
+        return lineWidgets
         
     def getLineNumberString(self, endLine, index):
         """ Return the Line Number String """

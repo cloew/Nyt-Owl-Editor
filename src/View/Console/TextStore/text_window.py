@@ -23,7 +23,7 @@ class TextWindow:
     def prepareWindow(self, cursor):
         """ Prepares the window with the current cursor and terminal size """
         self.window_height = Window.terminal.height - 2
-        self.window_width = Window.terminal.width - 2 - len(str(max(right_col, cursor.col)))
+        self.window_width = Window.terminal.width - 2 - len(str(max(self.right_col, cursor.col)))
         self.checkCursorLocation(cursor)
 
     def checkCursorLocation(self, cursor):

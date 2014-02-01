@@ -1,11 +1,13 @@
 from View.Console.TextStore.text_line_widget import TextLineWidget
 
+from kao_gui.console.window import Window
+
 class CursorTextLineWidget(TextLineWidget):
     """ Represents the view for a Text Line Widget with the cursor """
     
     def __init__(self, line, lineNumber, textWindow, cursor):
         """ Initialize the view """
-        TextLineWidget.__init__(line, lineNumber, textWindow)
+        TextLineWidget.__init__(self, line, lineNumber, textWindow)
         self.cursor = cursor
         
     def draw(self):

@@ -1,4 +1,5 @@
 from kao_gui.console.console_widget import ConsoleWidget
+from kao_gui.console.window import Window
 
 class TextLineWidget(ConsoleWidget):
     """ Represents the view for a Text Line Widget """
