@@ -11,33 +11,21 @@ class Cursor:
         
     def up(self):
         """ Move the cursor up a line """
-        if self.line > 0:
-            self.line -= 1
-            
-        self.normalizeCol()
+        self.jumpDown(-1)
             
     def jumpUp(self, linesToJump):
         """ Jumps the cursor down the given number of lines """
-        if (self.line-linesToJump) > 0:
-            self.line -= linesToJump
-        else:
-            self.line = 0
-
-        self.normalizeCol()
+        self.jumpDown(-1*linesToJump)
 
     def down(self):
         """ Move the cursor down a line """
-        if self.line < self.textStore.lastLine():
-            self.line += 1
-            
-        self.normalizeCol()
+        self.jumpDown(1)
 
     def jumpDown(self, linesToJump):
         """ Jumps the cursor down the given number of lines """
-        if (self.line+linesToJump) < self.textStore.lastLine():
-            self.line += linesToJump
-        else:
-            self.line = self.textStore.lastLine()
+        self.line += linesToJump
+        self.line = max(self.line, 0)
+        self.line = min(self.line, self.textStore.lastLine())
 
         self.normalizeCol()
             
