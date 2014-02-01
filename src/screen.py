@@ -18,7 +18,6 @@ class Screen:
         """ Main loop for the Text Editor """
         headerString = "Current file: {t.blue}{0}{t.normal} | Line: {1} | Col: {2}\r"
         if not self.debugging:
-            cls()
             headerString = "{t.clear}" + headerString
             
         print headerString.format(self.parent.filename, self.parent.cursor.line, self.parent.cursor.col, t=self.terminal)

@@ -1,4 +1,5 @@
 from nytowl import NytOwlTextEditor
+from kao_gui.console.window import Window
 
 import sys
 
@@ -20,8 +21,9 @@ def processArgs(args):
 def main(args):
     """   """
     filename, debug = processArgs(args)
-    n = NytOwlTextEditor(filename, debug)
-    n.run()
+    with Window.window():
+        n = NytOwlTextEditor(filename, debug)
+        n.run()
     
     
 if __name__ == "__main__":
