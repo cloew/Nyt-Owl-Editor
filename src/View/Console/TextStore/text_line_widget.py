@@ -5,12 +5,11 @@ class TextLineWidget(ConsoleWidget):
     
     def __init__(self, line, lineNumber, textWindow):
         """ Initialize the view """
-        lineNumber = str(i)
-        self.lineNumber = lineNumber.zfill(maxLength)
+        self.lineNumber = lineNumber
         self.line = line
         
         self.startCol = textWindow.left_col
-        self.endCol = textWindow.left_col + textWindow.window_width
+        self.endCol = textWindow.right_col
         
     def draw(self):
         """ Draw the Widget """

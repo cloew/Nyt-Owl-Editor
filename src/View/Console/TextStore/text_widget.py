@@ -1,10 +1,11 @@
 from text_window import TextWindow
+from View.Console.TextStore.cursor_text_line_widget import CursorTextLineWidget
+from View.Console.TextStore.text_line_widget import TextLineWidget
 
 from kao_gui.console.console_widget import ConsoleWidget
-from kao_gui.console.window import Window
 
 class TextWidget(ConsoleWidget):
-    """ Represents the view for a *** """
+    """ Represents the view for a Text Widget """
     
     def __init__(self, textStore, cursor):
         """ Initialize the view """
@@ -15,52 +16,38 @@ class TextWidget(ConsoleWidget):
     def draw(self):
         """ Draw the Widget """
         self.textWindow.prepareWindow(self.cursor)
+        startLine, endLine = self.getStartAndEndLines()
+            
+        lineWidgets = self.getLineWidgets(startLine, endLine)
+            
+        for lineWidget in  lineWidgets:
+            lineWidget.draw()
+            
+    def getStartAndEndLines(self):
+        """ Return the Proper Start and End Lines """
         startLine = self.textWindow.top_line
-        endLine = self.textWindow.top_line + self.textWindow.window_height
+        endLine = self.textWindow.bottom_line
 
         if endLine > self.textStore.numLines():
             endLine = self.textStore.numLines()
             
-        maxLength = len(str(endLine - 1))
+        return startLine, endLine
+        
+    def getLineWidgets(self, startLine, endLine):
+        """ Return all the Line Widgets """
+        lineWidgets = []
         for i in range(startLine, endLine):
-            lineNumber = str(i)
-            lineNumber = lineNumber.zfill(maxLength)
             line = self.textStore.getLine(i)
+            lineNumber = self.getLineNumberString(endLine, i)
             if i == self.cursor.line:
-                self.printCursorLine(line, lineNumber)
+                widget = TextLineWidget(line, lineNumber, self.textWindow)
             else:
-                self.printNormalLine(line, lineNumber)
-                
-    def printCursorLine(self, line, lineNumber):
-        """ Prints a single line with the cursor to the console """
-        startCol = self.textWindow.left_col
-        endCol = self.textWindow.left_col + self.textWindow.window_width
-
-        beforeCursor = line[startCol:self.cursor.col]
-        if self.cursor.col < len(line):
-            cursor = Window.terminal.reverse(line[self.cursor.col])
-            afterCursor = line[self.cursor.col+1:endCol]
-        else:
-            cursor = Window.terminal.reverse(" ")
-            afterCursor = ""
+                widget = CursorTextLineWidget(line, lineNumber, self.textWindow, self.cursor)
+            lineWidgets.append(widget)
         
-        self.printTextLine("{0}{1}{2}".format(beforeCursor, cursor, afterCursor), lineNumber)
-
-    def printNormalLine(self, line, lineNumber):
-        """ Prints a single line to the console """
-        startCol = self.textWindow.left_col
-        endCol = self.textWindow.left_col + self.textWindow.window_width
-
-        self.printTextLine(line[startCol:endCol], lineNumber)
+    def getLineNumberString(self, endLine, index):
+        """ Return the Line Number String """
+        maxLength = len(str(endLine - 1))
+        lineNumber = str(index)
+        return lineNumber.zfill(maxLength)
         
-    def printTextLine(self, line, lineNumber):
-        """  """
-        print "{0}: {1}{t.normal}\r".format(lineNumber, line, t=Window.terminal)
-        
-    def getLinesToPrint(self):
-        """ Returns the number of printable lines """
-        numLines = self.textStore.numLines()
-        if numLines > self.NUM_LINES:
-            return self.NUM_LINES
-        else:
-            return numLines
