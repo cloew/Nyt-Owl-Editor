@@ -124,7 +124,7 @@ class NytOwlTextEditor:
     def concatenate(self, toCut, firstCut, lastCut, filler = ""):
         return toCut[:firstCut] + filler + toCut[lastCut:]
         
-    def save(self):
+    def save(self, event=None):
         """  """
         if self.noFile():
             self.filename = str(raw_input("Enter filename to save to: "))
