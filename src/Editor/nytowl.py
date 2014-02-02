@@ -1,5 +1,5 @@
 from Editor.Cursor.cursor import Cursor
-from text_store import TextStore
+from Editor.TextStore.text_store import TextStore
 
 import os
 
