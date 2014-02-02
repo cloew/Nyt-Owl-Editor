@@ -161,4 +161,7 @@ class NytOwlTextEditor:
     @property
     def base_filename(self):
         """ Return the File's basename """
-        return os.path.basename(self.filename)
+        if self.filename is None:
+            return None
+        else:
+            return os.path.basename(self.filename)
