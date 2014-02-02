@@ -1,4 +1,4 @@
-from cursor import Cursor
+from Editor.Cursor.cursor import Cursor
 from text_store import TextStore
 
 import os
