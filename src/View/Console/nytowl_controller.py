@@ -1,4 +1,4 @@
-from nytowl import NytOwlTextEditor
+from Editor.nytowl import NytOwlTextEditor
 from nytowl_screen import NytowlScreen
 
 from View.Console.cursor_commands import GetCursorCommands
