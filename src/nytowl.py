@@ -1,6 +1,8 @@
 from cursor import Cursor
 from text_store import TextStore
 
+import os
+
 class NytOwlTextEditor:
     """ The NytOwl Text Editor """
     
@@ -155,3 +157,8 @@ class NytOwlTextEditor:
             
     def noFile(self):
         return self.filename is None
+
+    @property
+    def base_filename(self):
+        """ Return the File's basename """
+        return os.path.basename(self.filename)

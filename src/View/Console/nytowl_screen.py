@@ -15,6 +15,6 @@ class NytowlScreen(ConsoleWidget):
     def draw(self):
         """ Draw the Widget """
         headerString = "{t.clear}Current file: {t.blue}{0}{t.normal} | Line: {1} | Col: {2}\r"
-        print headerString.format(self.editor.filename, self.cursor.line, self.cursor.col, t=Window.terminal)
+        print headerString.format(self.editor.base_filename, self.cursor.line, self.cursor.col, t=Window.terminal)
         
         self.textWidget.draw()
