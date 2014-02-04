@@ -1,4 +1,5 @@
 from Editor.Cursor.cursor import Cursor
+from Editor.Cursor.cursor_command_wrapper import CursorCommandWrapper
 from Editor.TextStore.text_store import TextStore
 
 import os
@@ -13,56 +14,8 @@ class NytOwlTextEditor:
         
         self.textStore = TextStore(filename)
         self.cursor = Cursor(self.textStore)
-            
-    def cursorUp(self, event=None):
-        """ Moves cursor up one line """
-        self.cursor.up()
         
-    def cursorDown(self, event=None):
-        """ Moves cursor down one line """
-        self.cursor.down()
-    
-    def cursorLeft(self, event=None):
-        """ Moves cursor left one column """
-        self.cursor.left()
-        
-    def cursorRight(self, event=None):
-        """ Moves cursor right one column """
-        self.cursor.right()
-        
-    def cursorStart(self, event=None):
-        """ Move cursor to the start of the line """
-        self.cursor.toStartOfLine()
-        
-    def cursorEnd(self, event=None):
-        """ Move cursor to the end of the line """
-        self.cursor.toEndOfLine()
-
-    def cursorPageUp(self, event=None):
-        """ Move the cursor up a page """
-        self.cursor.jumpUp(self.textWindow.window_height)
-        self.textWindow.top_line = self.cursor.line
-
-    def cursorPageDown(self, event=None):
-        """ Move the cursor down a page """
-        self.cursor.jumpDown(self.textWindow.window_height)
-        self.textWindow.top_line = self.cursor.line
-        
-    def cursorStartOfFile(self, event=None):
-        """ Move the cursor to the start of the file """
-        self.cursor.toStartOfFile()
-        
-    def cursorEndOfFile(self, event=None):
-        """ Move the cursor to the start of the file """
-        self.cursor.toEndOfFile()
-        
-    def cursorPreviousWord(self, event=None):
-        """ Move the cursor to the previous word """
-        self.cursor.toPreviousWord()
-        
-    def cursorNextWord(self, event=None):
-        """ Move the cursor to the next word """
-        self.cursor.toNextWord()
+        self.cursorCommandWrapper = CursorCommandWrapper(self) 
         
     def currentLine(self):
         """ Returns the current line """
