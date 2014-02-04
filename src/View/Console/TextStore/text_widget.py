@@ -38,7 +38,7 @@ class TextWidget(ConsoleWidget):
         lineWidgets = []
         for i in range(startLine, endLine):
             line = self.textStore.getLine(i)
-            lineNumber = self.getLineNumberString(endLine, i)
+            lineNumber = self.getLineNumberString(endLine, i+1)
             if i == self.cursor.line:
                 widget = CursorTextLineWidget(line, lineNumber, self.textWindow, self.cursor)
             else:
@@ -49,7 +49,7 @@ class TextWidget(ConsoleWidget):
         
     def getLineNumberString(self, endLine, index):
         """ Return the Line Number String """
-        maxLength = len(str(endLine - 1))
+        maxLength = len(str(endLine))
         lineNumber = str(index)
         return lineNumber.zfill(maxLength)
         
