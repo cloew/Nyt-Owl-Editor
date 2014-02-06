@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.insert_text_action import InsertTextAction
 
 class TextStoreCommandWrapper:
     """ Wrapper for Text Store Commands """
@@ -22,13 +23,15 @@ class TextStoreCommandWrapper:
                 
     def addString(self, toAdd):
         """ Adds a string at the current cursor """
-        line = self.currentLine()
-        col = self.cursor.col
+        action = InsertTextAction(self.cursor, self.textStore, toAdd)
+        action.do()
+        # line = self.currentLine()
+        # col = self.cursor.col
         
-        self.textStore.text[self.cursor.line] = self.concatenate(line, col, col, filler = toAdd)
+        # self.textStore.text[self.cursor.line] = self.concatenate(line, col, col, filler = toAdd)
         
-        for i in toAdd:
-            self.cursor.right()
+        # for i in toAdd:
+            # self.cursor.right()
         
     def addLine(self, event=None):
         """ Adds a new line to the file """
