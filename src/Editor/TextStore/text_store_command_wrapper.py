@@ -32,18 +32,6 @@ class TextStoreCommandWrapper:
         action = InsertNewlineAction(self.cursor, self.textStore)
         action.do()
         
-        # line = self.currentLine()
-        # col = self.cursor.col
-        
-        # lineText = line[:col]
-        # newlineText = line[col:]
-        # self.textStore.text[self.cursor.line] = lineText
-        
-        # cut = self.cursor.line+1
-        # self.textStore.text = self.concatenate(self.textStore.text, cut, cut, filler = [newlineText])
-        # self.cursor.down()
-        # self.cursor.col = 0
-        
     def addTab(self, event=None):
         """ Adds a Tab at the current cursor location """
         self.addString(" "*4)
