@@ -1,4 +1,5 @@
 from Editor.TextStore.Action.insert_newline_action import InsertNewlineAction
+from Editor.TextStore.Action.insert_tab_action import InsertTabAction
 from Editor.TextStore.Action.insert_text_action import InsertTextAction
 
 class TextStoreCommandWrapper:
@@ -34,7 +35,8 @@ class TextStoreCommandWrapper:
         
     def addTab(self, event=None):
         """ Adds a Tab at the current cursor location """
-        self.addString(" "*4)
+        action = InsertTabAction(self.cursor, self.textStore)
+        action.do()
         
     def remove(self, event=None):
         """ Removes a character from the line """
