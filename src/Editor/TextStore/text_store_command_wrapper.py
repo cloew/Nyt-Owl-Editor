@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.insert_newline_action import InsertNewlineAction
 from Editor.TextStore.Action.insert_text_action import InsertTextAction
 
 class TextStoreCommandWrapper:
@@ -28,17 +29,20 @@ class TextStoreCommandWrapper:
         
     def addLine(self, event=None):
         """ Adds a new line to the file """
-        line = self.currentLine()
-        col = self.cursor.col
+        action = InsertNewlineAction(self.cursor, self.textStore)
+        action.do()
         
-        lineText = line[:col]
-        newlineText = line[col:]
-        self.textStore.text[self.cursor.line] = lineText
+        # line = self.currentLine()
+        # col = self.cursor.col
         
-        cut = self.cursor.line+1
-        self.textStore.text = self.concatenate(self.textStore.text, cut, cut, filler = [newlineText])
-        self.cursor.down()
-        self.cursor.col = 0
+        # lineText = line[:col]
+        # newlineText = line[col:]
+        # self.textStore.text[self.cursor.line] = lineText
+        
+        # cut = self.cursor.line+1
+        # self.textStore.text = self.concatenate(self.textStore.text, cut, cut, filler = [newlineText])
+        # self.cursor.down()
+        # self.cursor.col = 0
         
     def addTab(self, event=None):
         """ Adds a Tab at the current cursor location """
