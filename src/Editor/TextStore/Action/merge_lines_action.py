@@ -12,7 +12,7 @@ class MergeLinesAction:
         
     def do(self):
         """ Perform the action """
-        if self.line == self.textStore.lastLine:
+        if self.line == self.textStore.lastLine():
             return
         
         nextLineText = self.textStore.text[self.line+1]
