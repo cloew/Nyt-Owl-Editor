@@ -1,4 +1,5 @@
 from Editor.TextStore.Action.merge_lines_action import MergeLinesAction
+from Editor.TextStore.Action.remove_character_action import RemoveCharacterAction
 
 class RemovePreviousTextAction:
     """ Represents action to remove text """
@@ -19,11 +20,10 @@ class RemovePreviousTextAction:
         
     def removeChar(self):
         """ Removes a character from a line """
-        textLine = self.textStore.text[self.line]
-        col = self.column
-        
-        self.textStore.text[self.line] = self.concatenate(textLine, col-1, col)
         self.cursor.left()
+        
+        action = RemoveCharacterAction(self.cursor, self.textStore)
+        action.do()
         
     def removeLine(self):
         """ Removes a line and appends the extra characters to the line above """
@@ -35,6 +35,3 @@ class RemovePreviousTextAction:
         
         action = MergeLinesAction(self.cursor, self.textStore)
         action.do()
-        
-    def concatenate(self, toCut, firstCut, lastCut, filler = ""):
-        return toCut[:firstCut] + filler + toCut[lastCut:]
