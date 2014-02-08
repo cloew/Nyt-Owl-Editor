@@ -1,6 +1,7 @@
 from Editor.TextStore.Action.insert_newline_action import InsertNewlineAction
 from Editor.TextStore.Action.insert_tab_action import InsertTabAction
 from Editor.TextStore.Action.insert_text_action import InsertTextAction
+from Editor.TextStore.Action.remove_previous_text_action import RemovePreviousTextAction
 
 class TextStoreCommandWrapper:
     """ Wrapper for Text Store Commands """
@@ -40,10 +41,8 @@ class TextStoreCommandWrapper:
         
     def remove(self, event=None):
         """ Removes a character from the line """
-        if self.cursor.col == 0:
-            self.removeLine()
-        else:
-            self.removeChar()
+        action = RemovePreviousTextAction(self.cursor, self.textStore)
+        action.do()
             
     def delete(self, event=None):
         """ Deletes a character """
