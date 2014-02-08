@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.action_helper import concatenate
 
 class MergeLinesAction:
     """ Action to merge a line with its next line """
@@ -16,7 +17,4 @@ class MergeLinesAction:
         
         nextLineText = self.textStore.text[self.line+1]
         self.textStore.text[self.line] += nextLineText
-        self.textStore.text = self.concatenate(self.textStore.text, self.line+1, self.line+2, filler = [])
-        
-    def concatenate(self, toCut, firstCut, lastCut, filler = ""):
-        return toCut[:firstCut] + filler + toCut[lastCut:]
+        self.textStore.text = concatenate(self.textStore.text, self.line+1, self.line+2, filler = [])

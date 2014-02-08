@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.action_helper import concatenate
 
 class RemoveCharacterAction:
     """ Represents action to remove a character """
@@ -14,7 +15,4 @@ class RemoveCharacterAction:
         textLine = self.textStore.text[self.line]
         col = self.column
         
-        self.textStore.text[self.line] = self.concatenate(textLine, col, col+1)
-        
-    def concatenate(self, toCut, firstCut, lastCut, filler = ""):
-        return toCut[:firstCut] + filler + toCut[lastCut:]
+        self.textStore.text[self.line] = concatenate(textLine, col, col+1)
