@@ -61,9 +61,11 @@ class Cursor:
         """ Moves the cursor column to the start of the current line """
         self.col = 0
         
-    def toEndOfLine(self):
+    def toEndOfLine(self, line=None):
         """ Moves the cursor column to the end of the current line """
-        self.col = self.textStore.lastColumn(self.line)
+        if line is None:
+            line = self.line
+        self.col = self.textStore.lastColumn(line)
         
     def toPreviousWord(self):
         """ Move the cursor to the start of the previous word """
