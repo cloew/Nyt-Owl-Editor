@@ -20,10 +20,6 @@ class TextStoreCommandWrapper:
         
         for command in commands:
             setattr(parent, command, getattr(self, command))
-        
-    def currentLine(self):
-        """ Returns the current line """
-        return self.textStore.text[self.cursor.line]
                 
     def addString(self, toAdd):
         """ Adds a string at the current cursor """
@@ -49,28 +45,3 @@ class TextStoreCommandWrapper:
         """ Deletes a character """
         action = RemoveNextTextAction(self.cursor, self.textStore)
         action.do()
-            
-    def removeChar(self):
-        """ Removes a character from a line """
-        line = self.textStore.text[self.cursor.line]
-        col = self.cursor.col
-        
-        self.textStore.text[self.cursor.line] = self.concatenate(line, col-1, col)
-        self.cursor.left()
-        
-    def removeLine(self):
-        """ Removes a line and appends the extra characters to the line above """
-        if self.cursor.line == 0:
-            return
-        
-        line = self.textStore.text[self.cursor.line]
-        
-        self.cursor.col = len(self.textStore.text[self.cursor.line-1])
-        
-        self.textStore.text[self.cursor.line-1] += line
-        
-        self.textStore.text = self.concatenate(self.textStore.text, self.cursor.line, self.cursor.line+1, filler = [])
-        self.cursor.up()
-        
-    def concatenate(self, toCut, firstCut, lastCut, filler = ""):
-        return toCut[:firstCut] + filler + toCut[lastCut:]
