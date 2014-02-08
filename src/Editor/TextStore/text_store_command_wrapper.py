@@ -3,6 +3,7 @@ from Editor.TextStore.Action.insert_tab_action import InsertTabAction
 from Editor.TextStore.Action.insert_text_action import InsertTextAction
 from Editor.TextStore.Action.remove_next_text_action import RemoveNextTextAction
 from Editor.TextStore.Action.remove_previous_text_action import RemovePreviousTextAction
+from Editor.TextStore.Action.remove_tab_action import RemoveTabAction
 
 class TextStoreCommandWrapper:
     """ Wrapper for Text Store Commands """
@@ -19,7 +20,8 @@ class TextStoreCommandWrapper:
                     "addLine":InsertNewlineAction,
                     "addTab":InsertTabAction,
                     "remove":RemovePreviousTextAction,
-                    "delete":RemoveNextTextAction}
+                    "delete":RemoveNextTextAction,
+                    "removeTab":RemoveTabAction}
                     
         for command in commands:
             actionClass = commands[command]
