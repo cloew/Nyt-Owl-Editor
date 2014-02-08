@@ -15,33 +15,20 @@ class TextStoreCommandWrapper:
         
     def addCommandsToParent(self, parent):
         """ Add commands to the parent """
-        commands = ["addString", "addLine", "addTab", "remove",
-                    "delete"]
-        
+        commands = {"addString":InsertTextAction,
+                    "addLine":InsertNewlineAction,
+                    "addTab":InsertTabAction,
+                    "remove":RemovePreviousTextAction,
+                    "delete":RemoveNextTextAction}
+                    
         for command in commands:
+            actionClass = commands[command]
+            actionFunction = self.makeTextStoreActionEventFunction(actionClass)
+            setattr(self, command, actionFunction)
             setattr(parent, command, getattr(self, command))
-                
-    def addString(self, toAdd):
-        """ Adds a string at the current cursor """
-        action = InsertTextAction(self.cursor, self.textStore, toAdd)
-        action.do()
-        
-    def addLine(self, event=None):
-        """ Adds a new line to the file """
-        action = InsertNewlineAction(self.cursor, self.textStore)
-        action.do()
-        
-    def addTab(self, event=None):
-        """ Adds a Tab at the current cursor location """
-        action = InsertTabAction(self.cursor, self.textStore)
-        action.do()
-        
-    def remove(self, event=None):
-        """ Removes a character from the line """
-        action = RemovePreviousTextAction(self.cursor, self.textStore)
-        action.do()
             
-    def delete(self, event=None):
-        """ Deletes a character """
-        action = RemoveNextTextAction(self.cursor, self.textStore)
-        action.do()
+    def makeTextStoreActionEventFunction(self, actionClass):
+        def performAction(event):
+            action = actionClass(self.cursor, self.textStore, event)
+            action.do()
+        return performAction
