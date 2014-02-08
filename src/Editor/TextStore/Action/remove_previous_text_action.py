@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.merge_lines_action import MergeLinesAction
 
 class RemovePreviousTextAction:
     """ Represents action to remove text """
@@ -28,14 +29,12 @@ class RemovePreviousTextAction:
         """ Removes a line and appends the extra characters to the line above """
         if self.line == 0:
             return
-            
-        self.cursor.toEndOfLine(self.line-1)
-        
-        line = self.textStore.text[self.line]
-        self.textStore.text[self.line-1] += line
-        self.textStore.text = self.concatenate(self.textStore.text, self.line, self.line+1, filler = [])
         
         self.cursor.up()
+        self.cursor.toEndOfLine()
+        
+        action = MergeLinesAction(self.cursor, self.textStore)
+        action.do()
         
     def concatenate(self, toCut, firstCut, lastCut, filler = ""):
         return toCut[:firstCut] + filler + toCut[lastCut:]
