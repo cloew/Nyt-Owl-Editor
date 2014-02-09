@@ -17,3 +17,6 @@ class RemoveTabAction:
         action = RemoveCharacterAction(self.cursor, self.textStore)
         for i in range(4):
             action.do()
+            
+    def undo(self):
+        """ Undo the remove tab action """

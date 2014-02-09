@@ -1,3 +1,4 @@
+from Editor.TextStore.Action.remove_character_action import RemoveCharacterAction
 
 class InsertTextAction:
     """ Represents an Action to insert text into the text store """
@@ -21,3 +22,12 @@ class InsertTextAction:
         """ Insert Text into the line at the current Position """
         textLine = self.textStore.text[self.line]
         return textLine[:self.column] + self.textToInsert + textLine[self.column:]
+        
+    def undo(self):
+        """ Undo the remove tab action """
+        self.cursor.line = self.line
+        self.cursor.col = self.column
+        
+        action = RemoveCharacterAction(self.cursor, self.textStore)
+        for c in self.textToInsert:
+            action.do()

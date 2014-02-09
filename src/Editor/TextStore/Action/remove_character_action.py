@@ -16,3 +16,6 @@ class RemoveCharacterAction:
         col = self.column
         
         self.textStore.text[self.line] = concatenate(textLine, col, col+1)
+        
+    def undo(self):
+        """ Undo the remove tab action """

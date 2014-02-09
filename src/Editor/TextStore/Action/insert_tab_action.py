@@ -14,3 +14,6 @@ class InsertTabAction:
         """ Perform the action """
         insertTextAction = InsertTextAction(self.cursor, self.textStore, " "*4)
         insertTextAction.do()
+        
+    def undo(self):
+        """ Undo the remove tab action """

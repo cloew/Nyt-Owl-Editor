@@ -23,3 +23,6 @@ class InsertNewlineAction:
         
         self.cursor.down()
         self.cursor.toStartOfLine()
+        
+    def undo(self):
+        """ Undo the remove tab action """

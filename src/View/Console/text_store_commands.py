@@ -13,6 +13,7 @@ def GetTextStoreCommands(editor):
                      TAB:editor.addTab,
                      BACKSPACE:editor.remove,
                      KAO_DELETE:editor.delete,
-                     KAO_SHIFT_TAB:editor.removeTab})
+                     KAO_SHIFT_TAB:editor.removeTab,
+                     CTRL_Z:editor.undo})
                 
     return commands

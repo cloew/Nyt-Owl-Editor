@@ -12,6 +12,7 @@ class TextStoreCommandWrapper:
         """ Initialize the Cursor Command Wrapper with its parent """
         self.cursor = parent.cursor
         self.textStore = parent.textStore
+        self.lastAction = None
         self.addCommandsToParent(parent)
         
     def addCommandsToParent(self, parent):
@@ -29,8 +30,17 @@ class TextStoreCommandWrapper:
             setattr(self, command, actionFunction)
             setattr(parent, command, getattr(self, command))
             
+        parent.undo = self.undo
+            
     def makeTextStoreActionEventFunction(self, actionClass):
         def performAction(event):
             action = actionClass(self.cursor, self.textStore, event)
             action.do()
+            self.lastAction = action
         return performAction
+        
+    def undo(self, event=None):
+        """ Undo the previous action """
+        if self.lastAction is not None:
+            self.lastAction.undo()
+            self.lastAction = None

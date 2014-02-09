@@ -35,3 +35,6 @@ class RemovePreviousTextAction:
         
         action = MergeLinesAction(self.cursor, self.textStore)
         action.do()
+        
+    def undo(self):
+        """ Undo the remove tab action """

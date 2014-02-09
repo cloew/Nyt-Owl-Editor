@@ -18,3 +18,6 @@ class MergeLinesAction:
         nextLineText = self.textStore.text[self.line+1]
         self.textStore.text[self.line] += nextLineText
         self.textStore.text = concatenate(self.textStore.text, self.line+1, self.line+2, filler = [])
+        
+    def undo(self):
+        """ Undo the remove tab action """

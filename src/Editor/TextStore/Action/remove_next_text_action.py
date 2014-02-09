@@ -27,3 +27,6 @@ class RemoveNextTextAction:
         """ Removes a line and appends the extra characters to the line above """
         action = MergeLinesAction(self.cursor, self.textStore)
         action.do()
+        
+    def undo(self):
+        """ Undo the remove tab action """
