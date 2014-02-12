@@ -9,11 +9,17 @@ class InsertTabAction:
         self.column = cursor.col
         self.cursor = cursor
         self.textStore = textStore
+        self.insertTextAction = None
         
     def do(self):
         """ Perform the action """
-        insertTextAction = InsertTextAction(self.cursor, self.textStore, " "*4)
-        insertTextAction.do()
+        self.insertTextAction = InsertTextAction(self.cursor, self.textStore, " "*4)
+        self.insertTextAction.do()
         
     def undo(self):
         """ Undo the remove tab action """
+        self.cursor.line = self.line
+        self.cursor.col = self.column
+        
+        if self.insertTextAction is not None:
+            self.insertTextAction.undo()
