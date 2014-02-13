@@ -21,3 +21,11 @@ class MergeLinesAction:
         
     def undo(self):
         """ Undo the remove tab action """
+        from Editor.TextStore.Action.insert_newlines_action import InsertNewlineAction
+        
+        self.cursor.line = self.line
+        self.cursor.col = self.column
+        
+        action = InsertNewlineAction(self.cursor, self.textStore)
+        action.do()
+        
