@@ -1,4 +1,5 @@
 from Editor.TextStore.Action.remove_character_action import RemoveCharacterAction
+from Editor.TextStore.Operation.insert_text_operation import InsertTextOperation
 
 class InsertTextAction:
     """ Represents an Action to insert text into the text store """
@@ -13,10 +14,8 @@ class InsertTextAction:
         
     def do(self):
         """ Perform the action """
-        self.textStore.text[self.line] = self.insertTextAtCurrentPosition()
-        
-        for i in self.textToInsert:
-            self.cursor.right()
+        operation = InsertTextOperation(self.cursor, self.textStore, self.textToInsert)
+        operation.perform()
         
     def insertTextAtCurrentPosition(self):
         """ Insert Text into the line at the current Position """
