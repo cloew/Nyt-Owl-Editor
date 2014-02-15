@@ -6,6 +6,8 @@ class MergeLinesOperation(TextStoreOperation):
     
     def perform(self):
         """ Perform the Action """
-        nextLineText = self.textStore.text[self.line+1]
-        self.textStore.text[self.line] += nextLineText
-        self.textStore.text = concatenate(self.textStore.text, self.line+1, self.line+2, filler = [])
+        line = self.cursor.line
+        
+        nextLineText = self.textStore.text[line+1]
+        self.textStore.text[line] += nextLineText
+        self.textStore.text = concatenate(self.textStore.text, line+1, line+2, filler = [])
