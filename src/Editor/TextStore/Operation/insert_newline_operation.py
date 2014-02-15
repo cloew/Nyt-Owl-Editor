@@ -1,0 +1,19 @@
+from Editor.TextStore.Operation.text_store_operation import TextStoreOperation
+
+class InsertNewlineOperation(TextStoreOperation):
+    """ Represents operation to insert text """
+    
+    def perform(self):
+        """ Perform the Action """
+        textLine = self.textStore.text[self.cursor.line]
+        col = self.cursor.col
+        
+        originalLineText = textLine[:col]
+        newLineText = textLine[col:]
+        self.textStore.text[self.cursor.line] = originalLineText
+        
+        cut = self.cursor.line+1
+        self.textStore.text[cut:cut] = [newLineText]
+        
+        self.cursor.down()
+        self.cursor.toStartOfLine()
