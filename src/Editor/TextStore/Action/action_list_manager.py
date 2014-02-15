@@ -3,7 +3,7 @@ class ActionListManager:
     """ Manages the list of actions to handle performing undos and redos """
     
     def __init__(self):
-        """ Initialize the Action l=List Manager """
+        """ Initialize the Action List Manager """
         self.actionList = []
         self.nextActionIndex = 0
         
