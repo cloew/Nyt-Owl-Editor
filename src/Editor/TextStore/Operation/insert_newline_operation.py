@@ -1,7 +1,7 @@
 from Editor.TextStore.Operation.text_store_operation import TextStoreOperation
 
 class InsertNewlineOperation(TextStoreOperation):
-    """ Represents operation to insert text """
+    """ Represents operation to insert a newline """
     
     def perform(self):
         """ Perform the Action """
