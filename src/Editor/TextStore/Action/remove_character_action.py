@@ -1,21 +1,21 @@
-from Editor.TextStore.Action.action_helper import concatenate
+from Editor.TextStore.Action.text_store_action import TextStoreAction
 
-class RemoveCharacterAction:
+from Editor.TextStore.Operation.insert_text_operation import InsertTextOperation
+from Editor.TextStore.Operation.remove_character_operation import RemoveCharacterOperation
+
+class RemoveCharacterAction(TextStoreAction):
     """ Represents action to remove a character """
-    
-    def __init__(self, cursor, textStore, event=None):
-        """ Initialize the Action """
-        self.line = cursor.line
-        self.column = cursor.col
-        self.cursor = cursor
-        self.textStore = textStore
         
     def do(self):
         """ Perform the action """
         textLine = self.textStore.text[self.line]
         col = self.column
+        self.removedCharacter = textLine[col]
         
-        self.textStore.text[self.line] = concatenate(textLine, col, col+1)
+        operation = RemoveCharacterOperation(self.cursor, self.textStore)
+        operation.perform()
         
-    def undo(self):
-        """ Undo the remove tab action """
+    def performUndoOperation(self):
+        """ Undo the remove character action """
+        operation = InsertTextOperation(self.cursor, self.textStore, self.removedCharacter)
+        operation.perform()
