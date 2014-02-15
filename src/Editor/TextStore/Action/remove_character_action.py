@@ -5,6 +5,10 @@ from Editor.TextStore.Operation.remove_character_operation import RemoveCharacte
 
 class RemoveCharacterAction(TextStoreAction):
     """ Represents action to remove a character """
+    
+    def isDoable(self):
+        """ Return if the action can be done """
+        return True
         
     def performDoOperation(self):
         """ Perform the action """

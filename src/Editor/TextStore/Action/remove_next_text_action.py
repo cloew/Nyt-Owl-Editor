@@ -4,6 +4,10 @@ from Editor.TextStore.Action.text_store_action import TextStoreAction
 
 class RemoveNextTextAction(TextStoreAction):
     """ Represents an action to remove the next character """
+    
+    def isDoable(self):
+        """ Return if the action can be done """
+        return not (self.line == self.textStore.lastLine() and self.column == len(self.textStore.text[self.line]))
         
     def performDoOperation(self):
         """ Perform the action """

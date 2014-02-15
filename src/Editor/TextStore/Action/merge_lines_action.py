@@ -5,12 +5,13 @@ from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
 
 class MergeLinesAction(TextStoreAction):
     """ Action to merge a line with its next line """
+    
+    def isDoable(self):
+        """ Return if the action can be done """
+        return True
         
     def performDoOperation(self):
         """ Perform the action """
-        if self.line == self.textStore.lastLine():
-            return
-        
         operation = MergeLinesOperation(self.cursor, self.textStore)
         operation.perform()
         

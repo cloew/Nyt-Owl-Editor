@@ -11,6 +11,10 @@ class InsertTextAction(TextStoreAction):
         self.textToInsert = textToInsert
         TextStoreAction.__init__(self, cursor, textStore)
         
+    def isDoable(self):
+        """ Return if the action can be done """
+        return True
+        
     def performDoOperation(self):
         """ Perform the action """
         operation = InsertTextOperation(self.cursor, self.textStore, self.textToInsert)

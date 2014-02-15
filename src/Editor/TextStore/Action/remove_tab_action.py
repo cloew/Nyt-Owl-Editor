@@ -5,6 +5,10 @@ from Editor.TextStore.Operation.remove_tab_operation import RemoveTabOperation
 
 class RemoveTabAction(TextStoreAction):
     """ Action to remove a tab """
+    
+    def isDoable(self):
+        """ Return if the action can be done """
+        return True
         
     def performDoOperation(self):
         """ Perform the action """

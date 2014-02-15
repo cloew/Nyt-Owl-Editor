@@ -38,8 +38,9 @@ class TextStoreCommandWrapper:
     def makeTextStoreActionEventFunction(self, actionClass):
         def performAction(event):
             action = actionClass(self.cursor, self.textStore, event)
-            action.do()
-            self.actionListManager.addAction(action)
+            if action.isDoable():
+                action.do()
+                self.actionListManager.addAction(action)
         return performAction
         
     def undo(self, event=None):

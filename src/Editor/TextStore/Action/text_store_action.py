@@ -9,13 +9,19 @@ class TextStoreAction:
         self.cursor = cursor
         self.textStore = textStore
         
+    def isDoable(self):
+        """ Return if the action can be done.
+            Should be overriden in subclass """
+        return False
+        
     def do(self):
         """ Perform the action """
         self.resetCursor()
         self.performDoOperation()
         
     def performDoOperation(self):
-        """ Perform the do operation """
+        """ Perform the do operation.
+            Should be overriden in subclass """
         
     def undo(self):
         """ Undo the action """
@@ -23,7 +29,8 @@ class TextStoreAction:
         self.performUndoOperation()
         
     def performUndoOperation(self):
-        """ Perform the undo operation """
+        """ Perform the undo operation.
+            Should be overriden in subclass """
         
     def resetCursor(self):
         """ Place the cursor back where the action occured """

@@ -5,6 +5,10 @@ from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
 
 class InsertNewlineAction(TextStoreAction):
     """ Represents the action to insert a newline in a file """
+    
+    def isDoable(self):
+        """ Return if the action can be done """
+        return True
         
     def performDoOperation(self):
         """ Perform the action """
