@@ -1,6 +1,6 @@
 from pbf.Commands import command_manager
 from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
-from pbf.python.templates import TemplatesRoot
+from pbf.kao.nytowl.templates import TemplatesRoot
 from pbf.templates import template_manager
 
 class NewTextStoreOperation:
