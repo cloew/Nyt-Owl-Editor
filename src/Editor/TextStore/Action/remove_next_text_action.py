@@ -1,15 +1,9 @@
 from Editor.TextStore.Action.merge_lines_action import MergeLinesAction
 from Editor.TextStore.Action.remove_character_action import RemoveCharacterAction
+from Editor.TextStore.Action.text_store_action import TextStoreAction
 
-class RemoveNextTextAction:
+class RemoveNextTextAction(TextStoreAction):
     """ Represents an action to remove the next character """
-    
-    def __init__(self, cursor, textStore, event=None):
-        """ Initialize the Action """
-        self.line = cursor.line
-        self.column = cursor.col
-        self.cursor = cursor
-        self.textStore = textStore
         
     def do(self):
         """ Perform the action """
@@ -20,13 +14,14 @@ class RemoveNextTextAction:
         
     def removeChar(self):
         """ Removes a character from a line """
-        action = RemoveCharacterAction(self.cursor, self.textStore)
-        action.do()
+        self.action = RemoveCharacterAction(self.cursor, self.textStore)
+        self.action.do()
         
     def removeLine(self):
         """ Removes a line and appends the extra characters to the line above """
-        action = MergeLinesAction(self.cursor, self.textStore)
-        action.do()
+        self.action = MergeLinesAction(self.cursor, self.textStore)
+        self.action.do()
         
     def undo(self):
-        """ Undo the remove tab action """
+        """ Undo the remove next text action """
+        self.action.undo()
