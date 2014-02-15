@@ -1,3 +1,5 @@
+from Editor.TextStore.Action.action_list_manager import ActionListManager
+
 from Editor.TextStore.Action.insert_newline_action import InsertNewlineAction
 from Editor.TextStore.Action.insert_tab_action import InsertTabAction
 from Editor.TextStore.Action.insert_text_action import InsertTextAction
@@ -12,7 +14,7 @@ class TextStoreCommandWrapper:
         """ Initialize the Cursor Command Wrapper with its parent """
         self.cursor = parent.cursor
         self.textStore = parent.textStore
-        self.lastAction = None
+        self.actionListManager = ActionListManager()
         self.addCommandsToParent(parent)
         
     def addCommandsToParent(self, parent):
@@ -36,11 +38,9 @@ class TextStoreCommandWrapper:
         def performAction(event):
             action = actionClass(self.cursor, self.textStore, event)
             action.do()
-            self.lastAction = action
+            self.actionListManager.addAction(action)
         return performAction
         
     def undo(self, event=None):
         """ Undo the previous action """
-        if self.lastAction is not None:
-            self.lastAction.undo()
-            self.lastAction = None
+        self.actionListManager.undoPreviousAction()
