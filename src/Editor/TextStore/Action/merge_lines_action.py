@@ -1,31 +1,21 @@
-from Editor.TextStore.Action.action_helper import concatenate
+from Editor.TextStore.Action.text_store_action import TextStoreAction
 
-class MergeLinesAction:
+from Editor.TextStore.Operation.insert_newline_operation import InsertNewlineOperation
+from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
+
+class MergeLinesAction(TextStoreAction):
     """ Action to merge a line with its next line """
-    
-    def __init__(self, cursor, textStore, event=None):
-        """ Initialize the Action """
-        self.line = cursor.line
-        self.column = cursor.col
-        self.cursor = cursor
-        self.textStore = textStore
         
     def do(self):
         """ Perform the action """
         if self.line == self.textStore.lastLine():
             return
         
-        nextLineText = self.textStore.text[self.line+1]
-        self.textStore.text[self.line] += nextLineText
-        self.textStore.text = concatenate(self.textStore.text, self.line+1, self.line+2, filler = [])
+        operation = MergeLinesOperation(self.cursor, self.textStore)
+        operation.perform()
         
-    def undo(self):
-        """ Undo the remove tab action """
-        from Editor.TextStore.Action.insert_newlines_action import InsertNewlineAction
-        
-        self.cursor.line = self.line
-        self.cursor.col = self.column
-        
-        action = InsertNewlineAction(self.cursor, self.textStore)
-        action.do()
+    def performUndoOperation(self):
+        """ Undo the merge lines action """
+        operation = InsertNewlineOperation(self.cursor, self.textStore)
+        operation.perform()
         
