@@ -6,7 +6,7 @@ from Editor.TextStore.Operation.remove_tab_operation import RemoveTabOperation
 class InsertTabAction(TextStoreAction):
     """ Represents action to insert a tab """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         operation = InsertTabOperation(self.cursor, self.textStore)
         operation.perform()

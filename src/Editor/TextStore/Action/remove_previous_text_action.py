@@ -5,7 +5,7 @@ from Editor.TextStore.Action.text_store_action import TextStoreAction
 class RemovePreviousTextAction(TextStoreAction):
     """ Represents action to remove text """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         if self.column == 0:
             self.cursor.up()

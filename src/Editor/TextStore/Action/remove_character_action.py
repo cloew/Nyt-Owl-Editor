@@ -6,7 +6,7 @@ from Editor.TextStore.Operation.remove_character_operation import RemoveCharacte
 class RemoveCharacterAction(TextStoreAction):
     """ Represents action to remove a character """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         textLine = self.textStore.text[self.line]
         col = self.column

@@ -6,7 +6,7 @@ from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
 class MergeLinesAction(TextStoreAction):
     """ Action to merge a line with its next line """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         if self.line == self.textStore.lastLine():
             return

@@ -6,7 +6,7 @@ from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
 class InsertNewlineAction(TextStoreAction):
     """ Represents the action to insert a newline in a file """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         operation = InsertNewlineOperation(self.cursor, self.textStore)
         operation.perform()

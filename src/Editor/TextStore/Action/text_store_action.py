@@ -11,6 +11,11 @@ class TextStoreAction:
         
     def do(self):
         """ Perform the action """
+        self.resetCursor()
+        self.performDoOperation()
+        
+    def performDoOperation(self):
+        """ Perform the do operation """
         
     def undo(self):
         """ Undo the action """

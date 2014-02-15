@@ -11,7 +11,7 @@ class InsertTextAction(TextStoreAction):
         self.textToInsert = textToInsert
         TextStoreAction.__init__(self, cursor, textStore)
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         operation = InsertTextOperation(self.cursor, self.textStore, self.textToInsert)
         operation.perform()

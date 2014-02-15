@@ -6,7 +6,7 @@ from Editor.TextStore.Operation.remove_tab_operation import RemoveTabOperation
 class RemoveTabAction(TextStoreAction):
     """ Action to remove a tab """
         
-    def do(self):
+    def performDoOperation(self):
         """ Perform the action """
         operation = RemoveTabOperation(self.cursor, self.textStore)
         operation.perform()
