@@ -1,5 +1,3 @@
-from Editor.TextStore.Action.merge_lines_action import MergeLinesAction
-
 from Editor.TextStore.Operation.insert_newline_operation import InsertNewlineOperation
 from Editor.TextStore.Operation.merge_lines_operation import MergeLinesOperation
 
@@ -25,6 +23,3 @@ class InsertNewlineAction:
         
         operation = MergeLinesOperation(self.cursor, self.textStore)
         operation.perform()
-        
-        # action = MergeLinesAction(self.cursor, self.textStore)
-        # action.do()
