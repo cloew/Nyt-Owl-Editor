@@ -8,7 +8,7 @@ class RemoveTabAction(TextStoreAction):
     
     def isDoable(self):
         """ Return if the action can be done """
-        return True
+        return not (self.column == 0)
         
     def performDoOperation(self):
         """ Perform the action """
