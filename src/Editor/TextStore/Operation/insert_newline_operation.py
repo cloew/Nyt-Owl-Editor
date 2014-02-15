@@ -10,10 +10,14 @@ class InsertNewlineOperation(TextStoreOperation):
         
         originalLineText = textLine[:col]
         newLineText = textLine[col:]
-        self.textStore.text[self.cursor.line] = originalLineText
         
-        cut = self.cursor.line+1
-        self.textStore.text[cut:cut] = [newLineText]
+        self.textStore.text[self.cursor.line] = originalLineText
+        self.insertNewLine(newLineText)
         
         self.cursor.down()
         self.cursor.toStartOfLine()
+        
+    def insertNewLine(self, newLineText):
+        """ Insert the New Line Text as the next line in the text store """
+        nextLine = self.cursor.line+1
+        self.textStore.text[cut:cut] = [newLineText]
