@@ -7,4 +7,4 @@ class InsertTabOperation(TextStoreOperation):
     def perform(self):
         """ Perform the Action """
         insertTextOperation = InsertTextOperation(self.cursor, self.textStore, " "*4)
-        insertTextAction.do()
+        insertTextOperation.perform()
