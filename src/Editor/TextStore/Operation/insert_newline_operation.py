@@ -19,5 +19,5 @@ class InsertNewlineOperation(TextStoreOperation):
         
     def insertNewLine(self, newLineText):
         """ Insert the New Line Text as the next line in the text store """
-        nextLine = self.cursor.line+1
-        self.textStore.text[cut:cut] = [newLineText]
+        nextLineNumber = self.cursor.line+1
+        self.textStore.text[nextLineNumber:nextLineNumber] = [newLineText]

@@ -1,5 +1,7 @@
 from Editor.TextStore.Action.merge_lines_action import MergeLinesAction
 
+from Editor.TextStore.Operation.insert_newline_operation import InsertNewlineOperation
+
 class InsertNewlineAction:
     """ Represents the action to insert a newline in a file """
     
@@ -12,18 +14,21 @@ class InsertNewlineAction:
         
     def do(self):
         """ Perform the action """
-        textLine = self.textStore.text[self.line]
-        col = self.column
+        operation = InsertNewlineOperation(self.cursor, self.textStore)
+        operation.perform()
         
-        originalLineText = textLine[:col]
-        newLineText = textLine[col:]
-        self.textStore.text[self.line] = originalLineText
+        # textLine = self.textStore.text[self.line]
+        # col = self.column
         
-        cut = self.line+1
-        self.textStore.text[cut:cut] = [newLineText]
+        # originalLineText = textLine[:col]
+        # newLineText = textLine[col:]
+        # self.textStore.text[self.line] = originalLineText
         
-        self.cursor.down()
-        self.cursor.toStartOfLine()
+        # cut = self.line+1
+        # self.textStore.text[cut:cut] = [newLineText]
+        
+        # self.cursor.down()
+        # self.cursor.toStartOfLine()
         
     def undo(self):
         """ Undo the remove tab action """
