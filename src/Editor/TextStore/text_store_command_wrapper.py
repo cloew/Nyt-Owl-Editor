@@ -33,6 +33,7 @@ class TextStoreCommandWrapper:
             setattr(parent, command, getattr(self, command))
             
         parent.undo = self.undo
+        parent.redo = self.redo
             
     def makeTextStoreActionEventFunction(self, actionClass):
         def performAction(event):
@@ -44,3 +45,7 @@ class TextStoreCommandWrapper:
     def undo(self, event=None):
         """ Undo the previous action """
         self.actionListManager.undoPreviousAction()
+        
+    def redo(self, event=None):
+        """ Redo the last undone action """
+        self.actionListManager.redoPreviousAction()

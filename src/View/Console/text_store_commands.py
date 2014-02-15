@@ -14,6 +14,7 @@ def GetTextStoreCommands(editor):
                      BACKSPACE:editor.remove,
                      KAO_DELETE:editor.delete,
                      KAO_SHIFT_TAB:editor.removeTab,
-                     CTRL_Z:editor.undo})
+                     CTRL_Z:editor.undo,
+                     CTRL_Y:editor.redo})
                 
     return commands

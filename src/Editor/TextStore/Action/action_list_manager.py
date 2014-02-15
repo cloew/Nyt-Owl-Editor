@@ -14,7 +14,14 @@ class ActionListManager:
         
     def undoPreviousAction(self):
         """ Undo the previous action """
-        if not self.nextActionIndex == 0:
+        if self.nextActionIndex > 0:
             self.nextActionIndex -= 1
             action = self.actionList[self.nextActionIndex]
             action.undo()
+            
+    def redoPreviousAction(self):
+        """ Redo the previous undone action """
+        if self.nextActionIndex < len(self.actionList):
+            action = self.actionList[self.nextActionIndex]
+            action.do()
+            self.nextActionIndex += 1
