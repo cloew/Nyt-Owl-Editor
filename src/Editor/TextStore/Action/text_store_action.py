@@ -15,7 +15,7 @@ class TextStoreAction:
     def undo(self):
         """ Undo the action """
         self.resetCursor()
-        self.performUndoOpertaion()
+        self.performUndoOperation()
         
     def performUndoOperation(self):
         """ Perform the undo operation """
