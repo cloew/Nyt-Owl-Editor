@@ -1,4 +1,4 @@
-from Editor.TextStore.Action.action_helper import concatenate
+from Editor.TextStore.Operation.operation_helper import concatenate
 from Editor.TextStore.Operation.text_store_operation import TextStoreOperation
 
 class MergeLinesOperation(TextStoreOperation):
