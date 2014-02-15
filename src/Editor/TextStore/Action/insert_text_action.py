@@ -16,9 +16,8 @@ class InsertTextAction(TextStoreAction):
         operation = InsertTextOperation(self.cursor, self.textStore, self.textToInsert)
         operation.perform()
         
-        
     def performUndoOperation(self):
         """ Undo the inserted text """
         operation = RemoveCharacterOperation(self.cursor, self.textStore)
-        for c in self.textToInsert:
+        for character in self.textToInsert:
             operation.perform()

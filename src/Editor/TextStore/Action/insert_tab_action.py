@@ -1,25 +1,17 @@
-from Editor.TextStore.Action.insert_text_action import InsertTextAction
+from Editor.TextStore.Action.text_store_action import TextStoreAction
 
-class InsertTabAction:
+from Editor.TextStore.Operation.insert_tab_operation import InsertTabOperation
+from Editor.TextStore.Operation.remove_tab_operation import RemoveTabOperation
+
+class InsertTabAction(TextStoreAction):
     """ Represents action to insert a tab """
-    
-    def __init__(self, cursor, textStore, event=None):
-        """ Initialize the Action """
-        self.line = cursor.line
-        self.column = cursor.col
-        self.cursor = cursor
-        self.textStore = textStore
-        self.insertTextAction = None
         
     def do(self):
         """ Perform the action """
-        self.insertTextAction = InsertTextAction(self.cursor, self.textStore, " "*4)
-        self.insertTextAction.do()
+        operation = InsertTabOperation(self.cursor, self.textStore)
+        operation.perform()
         
-    def undo(self):
-        """ Undo the remove tab action """
-        self.cursor.line = self.line
-        self.cursor.col = self.column
-        
-        if self.insertTextAction is not None:
-            self.insertTextAction.undo()
+    def performUndoOperation(self):
+        """ Undo the insert tab action """
+        operation = RemoveTabOperation(self.cursor, self.textStore)
+        operation.perform()
