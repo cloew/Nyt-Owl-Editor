@@ -11,5 +11,6 @@ class InsertTabOperation(TextStoreOperation):
     
     def perform(self):
         """ Perform the Action """
-        insertTextOperation = InsertTextOperation(self.cursor, self.textStore, " "*self.settings.tabSize)
+        spacesToAdd = self.settings.tabSize-self.cursor.col%self.settings.tabSize
+        insertTextOperation = InsertTextOperation(self.cursor, self.textStore, " "*spacesToAdd)
         insertTextOperation.perform()
