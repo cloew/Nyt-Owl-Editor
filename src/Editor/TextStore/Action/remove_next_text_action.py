@@ -18,12 +18,12 @@ class RemoveNextTextAction(TextStoreAction):
         
     def removeChar(self):
         """ Removes a character from a line """
-        self.action = RemoveCharacterAction(self.cursor, self.textStore)
+        self.action = RemoveCharacterAction(self.cursor, self.textStore, self.settings)
         self.action.do()
         
     def removeLine(self):
         """ Removes a line and appends the extra characters to the line above """
-        self.action = MergeLinesAction(self.cursor, self.textStore)
+        self.action = MergeLinesAction(self.cursor, self.textStore, self.settings)
         self.action.do()
         
     def undo(self):

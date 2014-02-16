@@ -2,12 +2,14 @@
 class TextStoreAction:
     """ Represents a text store action """
     
-    def __init__(self, cursor, textStore, event=None):
+    def __init__(self, cursor, textStore, settings, event=None):
         """ Initialize the Action """
         self.line = cursor.line
         self.column = cursor.col
+        
         self.cursor = cursor
         self.textStore = textStore
+        self.settings = settings
         
     def isDoable(self):
         """ Return if the action can be done.

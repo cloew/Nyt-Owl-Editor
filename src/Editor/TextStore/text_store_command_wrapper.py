@@ -10,10 +10,12 @@ from Editor.TextStore.Action.remove_tab_action import RemoveTabAction
 class TextStoreCommandWrapper:
     """ Wrapper for Text Store Commands """
     
-    def __init__(self, parent):
+    def __init__(self, parent, settings):
         """ Initialize the Cursor Command Wrapper with its parent """
         self.cursor = parent.cursor
         self.textStore = parent.textStore
+        self.settings = settings
+        
         self.actionListManager = ActionListManager()
         self.addCommandsToParent(parent)
         
@@ -37,7 +39,7 @@ class TextStoreCommandWrapper:
             
     def makeTextStoreActionEventFunction(self, actionClass):
         def performAction(event):
-            action = actionClass(self.cursor, self.textStore, event)
+            action = actionClass(self.cursor, self.textStore, self.settings, event)
             if action.isDoable():
                 action.do()
                 self.actionListManager.addAction(action)

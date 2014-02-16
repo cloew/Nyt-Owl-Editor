@@ -6,10 +6,10 @@ from Editor.TextStore.Operation.remove_character_operation import RemoveCharacte
 class InsertTextAction(TextStoreAction):
     """ Represents an Action to insert text into the text store """
     
-    def __init__(self, cursor, textStore, textToInsert):
+    def __init__(self, cursor, textStore, settings, textToInsert):
         """ Initialize the Insert Text Action """
         self.textToInsert = textToInsert
-        TextStoreAction.__init__(self, cursor, textStore)
+        TextStoreAction.__init__(self, cursor, textStore, settings)
         
     def isDoable(self):
         """ Return if the action can be done """

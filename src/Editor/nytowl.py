@@ -1,5 +1,6 @@
 from Editor.Cursor.cursor import Cursor
 from Editor.Cursor.cursor_command_wrapper import CursorCommandWrapper
+from Editor.Settings.settings import Settings
 from Editor.TextStore.text_store import TextStore
 from Editor.TextStore.text_store_command_wrapper import TextStoreCommandWrapper
 
@@ -15,9 +16,10 @@ class NytOwlTextEditor:
         
         self.textStore = TextStore(filename)
         self.cursor = Cursor(self.textStore)
+        self.settings = Settings()
         
         self.cursorCommandWrapper = CursorCommandWrapper(self) 
-        self.textStoreCommandWrapper = TextStoreCommandWrapper(self)
+        self.textStoreCommandWrapper = TextStoreCommandWrapper(self, self.settings)
         
     def save(self, event=None):
         """  """

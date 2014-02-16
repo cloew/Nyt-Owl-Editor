@@ -17,7 +17,7 @@ class RemovePreviousTextAction(TextStoreAction):
         else:
             self.cursor.left()
             
-        self.action = RemoveNextTextAction(self.cursor, self.textStore)
+        self.action = RemoveNextTextAction(self.cursor, self.textStore, self.settings)
         self.action.do()
         
     def undo(self):
