@@ -12,10 +12,10 @@ class InsertTabAction(TextStoreAction):
         
     def performDoOperation(self):
         """ Perform the action """
-        operation = InsertTabOperation(self.cursor, self.textStore)
+        operation = InsertTabOperation(self.cursor, self.textStore, self.settings)
         operation.perform()
         
     def performUndoOperation(self):
         """ Undo the insert tab action """
-        operation = RemoveTabOperation(self.cursor, self.textStore)
+        operation = RemoveTabOperation(self.cursor, self.textStore, self.settings)
         operation.perform()
