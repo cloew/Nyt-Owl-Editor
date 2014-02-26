@@ -12,6 +12,7 @@ class TextWidget(ConsoleWidget):
         self.cursor = editor.cursor
         self.textStore = editor.textStore
         self.textWindow = editor.textWindow
+        self.settings = editor.settings
         
     def draw(self):
         """ Draw the Widget """
@@ -40,9 +41,9 @@ class TextWidget(ConsoleWidget):
             line = self.textStore.getLine(i)
             lineNumber = self.getLineNumberString(endLine, i+1)
             if i == self.cursor.line:
-                widget = CursorTextLineWidget(line, lineNumber, self.textWindow, self.cursor)
+                widget = CursorTextLineWidget(line, lineNumber, self.textWindow, self.settings, self.cursor)
             else:
-                widget = TextLineWidget(line, lineNumber, self.textWindow)
+                widget = TextLineWidget(line, lineNumber, self.textWindow, self.settings)
             lineWidgets.append(widget)
             
         return lineWidgets

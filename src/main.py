@@ -1,5 +1,5 @@
 from View.Console.nytowl_controller import NytowlController
-from kao_gui.console.window import Window
+from kao_gui.console.window import WindowManager
 
 import sys
 
@@ -21,7 +21,7 @@ def processArgs(args):
 def main(args):
     """   """
     filename, debug = processArgs(args)
-    with Window.window():
+    with WindowManager():
         controller = NytowlController(filename)
         controller.run()
     

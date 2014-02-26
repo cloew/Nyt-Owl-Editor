@@ -1,4 +1,4 @@
-from kao_gui.console.window import Window
+from kao_gui.console.window import GetWindow
 
 class TextWindow:
     """ Represents the widnow of the text file that is visible """
@@ -22,10 +22,11 @@ class TextWindow:
 
     def prepareWindow(self, cursor):
         """ Prepares the window with the current cursor and terminal size """
-        self.window_height = Window.terminal.height - 2
+        window = GetWindow()
+        self.window_height = window.terminal.height - 2
         self.checkCursorRow(cursor)
         
-        self.window_width = Window.terminal.width - 2 - len(str(self.bottom_line-1))
+        self.window_width = window.terminal.width - 2 - len(str(self.bottom_line-1))
         self.checkCursorColumn(cursor)
 
     def checkCursorRow(self, cursor):
