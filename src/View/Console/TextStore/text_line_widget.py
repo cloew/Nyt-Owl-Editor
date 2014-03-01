@@ -18,8 +18,8 @@ class TextLineWidget(ConsoleWidget):
         
     def printTextLine(self, line):
         """ Print the given text line with a line number """
-        # for keyword in self.settings.keywords:
-            # line = line.replace(keyword, "{t.green}{0}{t.normal}".format(keyword, t=self.terminal))
+        for keyword in self.settings.keywords:
+            line = line.replace(keyword, "{t.green}{0}{t.normal}".format(keyword, t=self.terminal))
         
         text = "{0}: {1}".format(self.lineNumber, line)
         text = text.replace('\r', '')
