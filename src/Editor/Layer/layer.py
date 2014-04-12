@@ -11,5 +11,8 @@ class Layer:
     def generateLines(self, cursor, textStore, textWindow):
         """ Generate the layer lines for the cursor, text store and current text window """
         currentFunctionLines = PythonFunctionFinder().findFunction(textStore.text, cursor.line, cursor.col)
-        results = PythonRunner(currentFunctionLines).processFunction()
-        return [str(results[key]) for key in results]
+        try:
+            results = PythonRunner(currentFunctionLines).processFunction()
+            return [str(results[key]) for key in results]
+        except Exception as error: # Want to catch any excpetion that happens in the Python Runner
+            return [str(error)]
