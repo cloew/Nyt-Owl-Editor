@@ -1,5 +1,5 @@
-from kao_pyrunner.FunctionFinder import PythonFunctionFinder
-from kao_pyrunner.Runner import PythonRunner
+from kao_pyrunner.FunctionFinder.python_function_finder import PythonFunctionFinder
+from kao_pyrunner.Runner.python_runner import PythonRunner
 
 class Layer:
     """ Represents a layer """
@@ -10,6 +10,6 @@ class Layer:
         
     def generateLines(self, cursor, textStore, textWindow):
         """ Generate the layer lines for the cursor, text store and current text window """
-        currentFunctionLines = PythonFunctionFinder().findFunction(testStore.text, cursor.line, cursor.col)
+        currentFunctionLines = PythonFunctionFinder().findFunction(textStore.text, cursor.line, cursor.col)
         results = PythonRunner(currentFunctionLines).processFunction()
-        return results
+        return [str(results[key]) for key in results]

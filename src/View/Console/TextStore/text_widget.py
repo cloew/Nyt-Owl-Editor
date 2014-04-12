@@ -1,4 +1,5 @@
 from text_window import TextWindow
+from Editor.Layer.layer import Layer
 from View.Console.TextStore.cursor_text_line_widget import CursorTextLineWidget
 from View.Console.TextStore.text_line_widget import TextLineWidget
 
@@ -13,6 +14,7 @@ class TextWidget(ConsoleWidget):
         self.textStore = editor.textStore
         self.textWindow = editor.textWindow
         self.settings = editor.settings
+        self.layer = Layer()
         
     def draw(self):
         """ Draw the Widget """
@@ -23,6 +25,8 @@ class TextWidget(ConsoleWidget):
             
         for lineWidget in  lineWidgets:
             lineWidget.draw()
+            
+        self.drawLayer()
             
     def getStartAndEndLines(self):
         """ Return the Proper Start and End Lines """
@@ -54,3 +58,10 @@ class TextWidget(ConsoleWidget):
         lineNumber = str(index)
         return lineNumber.zfill(maxLength)
         
+    def drawLayer(self):
+        """ Draw the current layer """
+        lines = self.layer.generateLines(self.cursor, self.textStore, self.textWindow)
+        lines = ['|'+str(line) for line in lines]
+        # raise Exception(lines)
+        maxLineLength = max([len(line) for line in lines])
+        self.drawAtPosition(lines, (self.terminal.width-maxLineLength, 2))
