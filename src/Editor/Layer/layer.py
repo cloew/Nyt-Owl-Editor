@@ -15,8 +15,5 @@ class Layer:
         if currentFunctionLines is None:
             return []
         
-        try:
-            results = PythonRunner(currentFunctionLines).processFunction()
-            return [str(results[key]) for key in results]
-        except Exception as error: # Want to catch any excpetion that happens in the Python Runner
-            return [str(error)]
+        results = PythonRunner(currentFunctionLines).processFunction()
+        return [str(results[key]) for key in results]
