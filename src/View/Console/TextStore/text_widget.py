@@ -61,7 +61,7 @@ class TextWidget(ConsoleWidget):
     def drawLayer(self):
         """ Draw the current layer """
         lines = self.layer.generateLines(self.cursor, self.textStore, self.textWindow)
-        lines = ['|'+str(line) for line in lines]
-        # raise Exception(lines)
-        maxLineLength = max([len(line) for line in lines])
-        self.drawAtPosition(lines, (self.terminal.width-maxLineLength, 2))
+        if len(lines) > 0:
+            lines = ['|'+str(line) for line in lines]
+            maxLineLength = max([len(line) for line in lines])
+            self.drawAtPosition(lines, (self.terminal.width-maxLineLength, 2))
