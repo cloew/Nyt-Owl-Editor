@@ -1,4 +1,5 @@
 from kao_pyrunner.FunctionFinder.python_function_finder import PythonFunctionFinder
+from kao_pyrunner.Runner.invalid_function_exception import InvalidFunctionException
 from kao_pyrunner.Runner.python_runner import PythonRunner
 
 class Layer:
@@ -12,8 +13,8 @@ class Layer:
         """ Generate the layer lines for the cursor, text store and current text window """
         currentFunctionLines = PythonFunctionFinder().findFunction(textStore.text, cursor.line, cursor.col)
         
-        if currentFunctionLines is None:
+        try:
+            results = PythonRunner(currentFunctionLines).processFunction()
+            return [str(results[key]) for key in results]
+        except InvalidFunctionException:
             return []
-        
-        results = PythonRunner(currentFunctionLines).processFunction()
-        return [str(results[key]) for key in results]
