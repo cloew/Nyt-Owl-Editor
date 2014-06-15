@@ -11,10 +11,10 @@ class Layer:
         
     def generateLines(self, cursor, textStore, textWindow):
         """ Generate the layer lines for the cursor, text store and current text window """
-        currentFunctionLines = PythonFunctionFinder().findFunction(textStore.text, cursor.line, cursor.col)
+        functionStartAndStop = PythonFunctionFinder().findFunction(textStore.text, cursor.line, cursor.col)
         
         try:
-            results = PythonRunner(currentFunctionLines).processFunction()
+            results = PythonRunner(textStore.text, functionStartAndStop).processFunction()
             return [str(results[key]) for key in results]
         except InvalidFunctionException:
             return []
