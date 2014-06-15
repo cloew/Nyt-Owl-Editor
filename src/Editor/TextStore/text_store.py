@@ -13,6 +13,8 @@ class TextStore:
                 self.text = []
                 for line in file.readlines():
                     self.text.append(line.rstrip('\n'))
+                if len(self.text) == 0:
+                    self.text = [""]
                 file.close()
             except IOError:
                 print "Unable to open file"
