@@ -1,7 +1,10 @@
 {
-    "widgets":[],
+    "widgets":[{"name":"editor",
+                "template":"partials/editor.knot",
+                "controller":"View.Knot.controllers.editor_controller.EditorController"}],
     "mods":[],
     "positioning":[],
     "sizing":[],
-    "services":[]
+    "services":[{"name":"editor",
+                 "class":"View.Knot.services.nytowl_editor.NytOwlEditor"}]
 }

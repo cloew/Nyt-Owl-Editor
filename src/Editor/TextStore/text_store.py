@@ -17,7 +17,7 @@ class TextStore:
                     self.text = [""]
                 file.close()
             except IOError:
-                print "Unable to open file"
+                print("Unable to open file")
                 
     def getLine(self, i):
         """ Returns the line i """

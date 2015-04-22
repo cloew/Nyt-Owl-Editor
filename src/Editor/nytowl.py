@@ -32,7 +32,7 @@ class NytOwlTextEditor:
                 file.write(line + "\n")
             file.close()
         except IOError:
-            print "Unable to open file"
+            print("Unable to open file")
             
     def noFile(self):
         return self.filename is None
@@ -44,3 +44,8 @@ class NytOwlTextEditor:
             return None
         else:
             return os.path.basename(self.filename)
+            
+    @property
+    def lines(self):
+        """ Return the lines for the file """
+        return self.textStore.text
