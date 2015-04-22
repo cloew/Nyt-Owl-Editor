@@ -11,4 +11,3 @@ class NytOwlEditor:
         filenames = self.args[1:]
         filename = filenames[0] if len(filenames) > 0 else None
         self.file = NytOwlTextEditor(filename, None)
-        print(filename)
