@@ -1,5 +1,5 @@
+import View.Knot
 
 div(T2B):
     @for line in $.file.lines
-        text:
-            $line
+        line($index, $line):

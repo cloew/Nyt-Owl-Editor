@@ -1,0 +1,8 @@
+
+div:
+    text:
+        @style margin-right: 10px;
+        $.lineNumber
+    text:
+        @position center(VERTICAL)
+        $.line
