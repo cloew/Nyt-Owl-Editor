@@ -1,0 +1,5 @@
+
+div(T2B):
+    @for line in $.file.lines
+        text:
+            $line

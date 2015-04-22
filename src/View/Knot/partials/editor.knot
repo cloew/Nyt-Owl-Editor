@@ -1,5 +1,3 @@
+import View.Knot
 
-div(T2B):
-    @for line in $.currentFile.lines
-        text:
-            $line
+file($.currentFile):

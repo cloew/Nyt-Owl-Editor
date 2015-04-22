@@ -1,7 +1,10 @@
 {
     "widgets":[{"name":"editor",
                 "template":"partials/editor.knot",
-                "controller":"View.Knot.controllers.editor_controller.EditorController"}],
+                "controller":"View.Knot.controllers.editor_controller.EditorController"},
+               {"name":"file",
+                "template":"partials/file.knot",
+                "controller":"View.Knot.controllers.file_controller.FileController"}],
     "mods":[],
     "positioning":[],
     "sizing":[],
