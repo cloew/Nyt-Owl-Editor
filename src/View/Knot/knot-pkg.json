@@ -1,5 +1,6 @@
 {
     "widgets":[{"name":"editor",
+                "type":"passthrough",
                 "template":"partials/editor.knot",
                 "controller":"View.Knot.controllers.editor_controller.EditorController"},
                {"name":"file",

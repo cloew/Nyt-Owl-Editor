@@ -9,3 +9,8 @@ class EditorController:
     def currentFile(self):
         """ Return the current file for the editor """
         return self.editor.file
+    
+    @property
+    def currentCursor(self):
+        """ Return the current cursor for the editor """
+        return self.currentFile.cursor

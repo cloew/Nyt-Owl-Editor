@@ -1,3 +1,10 @@
 import View.Knot
 
 file($.currentFile):
+
+status-bar:
+    text:
+        Ln: $.currentCursor.line
+    text:
+        @style margin: 0px 0px 0px 5px;
+        Col: $.currentCursor.col
